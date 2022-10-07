@@ -14,11 +14,9 @@ export default class ApiService {
         let  {key} = options;
        
          const response  = await axios.get(`${BASE_URL}?api_key=${key}`)
-          const data = response.data; 
-          
+          const data = response.data;          
          
-            this.page += 1;
-        
+            this.page += 1;        
      
             return data;
          }; 
