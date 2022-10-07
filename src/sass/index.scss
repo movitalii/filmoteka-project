@@ -1,3 +1,13 @@
 @import './utils/mixins';
 @import './utils/vars';
 @import './layouts/cart';
+/* Base styles*/
+@import './base/common';
+@import './base/reset';
+@import './base/container';
+@import './base/js-selectors';
+
+/* Layouts*/
+@import './layouts/home-page';
+@import './layouts/library-page';
+@import './layouts/footer';

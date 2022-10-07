@@ -2,10 +2,10 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://movitalii.github.io/filmoteka-team-project",
+  "homepage": "https://movitalii.github.io/filmoteka-project/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /filmoteka-team-project/"
+    "build": "parcel build src/*.html --public-url /filmoteka-project/"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "axios": "^1.1.2",
-    "modern-normalize": "^1.1.0"
+    "modern-normalize": "^1.1.0",
+    "tui-pagination": "^3.4.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
