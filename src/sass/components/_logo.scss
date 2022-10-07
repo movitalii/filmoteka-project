@@ -1,9 +1,9 @@
-// .logo__text {
-//     font-size: 30px;
-//     line-height: 35px;
-//     color: #ffffff;
+.logo__text {
+    font-size: 30px;
+    line-height: 35px;
+    color: #ffffff;
 
-//     @include mq(mobile-only) {
-//         display: none;
-//     }
-// }
+    @include mq(mobile-only) {
+        display: none;
+    }
+}
