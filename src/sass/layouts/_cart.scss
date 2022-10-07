@@ -1,11 +1,11 @@
 .cart {
-    @include mq (mobile) {
-    width: 280px;   
-    }
-    @include mq (tablet) {
-        width: 336px;
+    // @include mq (mobile) {
+    // width: 280px;   
+    // }
+    // @include mq (tablet) {
+    //     width: 336px;
        
-    }
+    // }
     @include mq (desktop) {
         width: 395px;    
 
