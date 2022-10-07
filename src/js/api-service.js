@@ -15,7 +15,7 @@ export default class ApiService {
        
          const response  = await axios.get(`${BASE_URL}?api_key=${key}`)
           const data = response.data; 
-          console.log(data)
+          
          
             this.page += 1;
         

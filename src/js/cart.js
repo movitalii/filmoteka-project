@@ -1,8 +1,9 @@
-export default function onCart(images) {
+export default function onCart({backdrop_path, name, title, vote_average}) {
+    const BASE_IMAGE = `https://image.tmdb.org/t/p/original`
     return `<div class="cart">
-    <img src="./images/project/Rectangle 18 (1).jpg" alt="A FISTFUL OF LEAD" class="cart_image">
-    <h2 class="cart_name">A FISTFUL OF LEAD</h2>
-    <p class="cart_title">Genre <span class="cart_span">Year </span><span class="cart_span-rating">  Rating</span></p>
+    <img src="${BASE_IMAGE}${backdrop_path}" alt="A FISTFUL OF LEAD" class="cart_image">
+    <h2 class="cart_name">${name||title}</h2>
+    <p class="cart_title">Genre <span class="cart_span">Year </span><span class="cart_span-rating">  ${vote_average}</span></p>
 </div>`
     
 }
