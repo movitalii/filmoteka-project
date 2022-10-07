@@ -1,8 +1,17 @@
+/* Utils */
+@import './utils/mixins';
+@import './utils/normalize';
+@import './utils/vars';
+@import './utils/visually-hidden';
+
 /* Base styles*/
 @import './base/common';
 @import './base/reset';
 @import './base/container';
 @import './base/js-selectors';
+
+/* Components */
+@import './components/logo';
 
 /* Layouts*/
 @import './layouts/home-page';
@@ -11,12 +20,3 @@
 @import './layouts/header-home';
 @import './layouts/header-library';
 @import './layouts/modal';
-
-/* Components */
-@import './components/logo';
-
-/* Utils */
-@import './utils/mixins';
-@import './utils/normalize';
-@import './utils/vars';
-@import './utils/visually-hidden';
