@@ -8,3 +8,15 @@
 @import './layouts/home-page';
 @import './layouts/library-page';
 @import './layouts/footer';
+@import './layouts/header-home';
+@import './layouts/header-library';
+@import './layouts/modal';
+
+/* Components */
+@import './components/logo';
+
+/* Utils */
+@import './utils/mixins';
+@import './utils/normalize';
+@import './utils/vars';
+@import './utils/visually-hidden';
