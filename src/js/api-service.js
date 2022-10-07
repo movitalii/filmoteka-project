@@ -17,16 +17,10 @@ export default class ApiService {
           const data = response.data;          
          
             this.page += 1;        
-     
+     console.log(data.results)
             return data;
-         }; 
-      
-    forEnd() {
-        if (document.querySelector(`.info-end`)) {
-            
-            document.querySelector(`.info-end`).remove();
-        }
-    }
+         };      
+   
      clearForm() {
         this.page = 1;
     }
