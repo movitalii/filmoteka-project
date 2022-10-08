@@ -1,0 +1,96 @@
+.header-lib {
+    margin: 0 auto;
+    width: 100%;
+  
+    padding-top: 40px;
+    padding-bottom: 44px;
+    height: 230px;
+  
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  
+    /* Background for mobile */
+    background-image: $headerGradient,
+      url('../images/header-lib/header-lib-bg_sm.jpg');
+    background-image: $headerGradient,
+      url('../images/header-lib/header-lib-bg_sm.webp');
+  
+    @include mq(retina) {
+      background-image: $headerGradient,
+        url('../images/header-lib/header-lib-bg_sm@2x.jpg');
+      background-image: $headerGradient,
+        url('../images/header-lib/header-lib-bg_sm@2x.webp');
+    }
+  
+    /* Background for tablet */
+    @include mq(tablet) {
+      height: 216px;
+      background-image: $headerGradient,
+        url('../images/header-lib/header-lib-bg_md.jpg');
+      background-image: $headerGradient,
+        url('../images/header-lib/header-lib-bg_md.webp');
+  
+      @include mq(retina) {
+        background-image: $headerGradient,
+          url('../images/header-lib/header-lib-bg_md@2x.jpg');
+        background-image: $headerGradient,
+          url('../images/header-lib/header-lib-bg_md@2x.webp');
+      }
+    }
+  
+    /*  Background for desktop */
+    @include mq(desktop) {
+      background-image: $headerGradient,
+        url('../images/header-lib/header-lib-bg_lg.jpg');
+      background-image: $headerGradient,
+        url('../images/header-lib/header-lib-bg_lg.webp');
+  
+      @include mq(retina) {
+        background-image: $headerGradient,
+          url('../images/header-lib/header-lib-bg_lg@2x.jpg');
+        background-image: $headerGradient,
+          url('../images/header-lib/header-lib-bg_lg@2x.webp');
+      }
+    }
+  
+    &__container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      margin-bottom: 54px;
+  
+      @include mq(tablet) {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+.library-button{
+    width: 148px;
+    height: 42px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: white;
+    border: solid white 1px;
+    background-color: transparent;
+    
+    margin: 8px;
+    
+}
+
+.btn_is-active {
+    background-color:rgba(255, 107, 1, 1);
+    ;
+    color: white;
+    border: 0;
+}
+  
