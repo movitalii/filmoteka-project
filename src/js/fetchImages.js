@@ -1,17 +1,14 @@
-import ApiService from "./api-service";
-import onCard from "./card";
+import ApiService from './api-service';
+import onCard from './card';
 
-const apiService = new ApiService ();
+const apiService = new ApiService();
 
 apiService.fetchImage().then(data => {
-    addArticleImage(data);
-})
+  addArticleImage(data);
+});
 
-function addArticleImage(data) { 
-    // console.log(data.results);
-    const cart = data.results.map(result => onCard(result)).join("");
-    document.querySelector(`.home-page`).insertAdjacentHTML("beforeend", cart)
-     
-    
-     
- }
+function addArticleImage(data) {
+  // console.log(data.results);
+  const cart = data.results.map(result => onCard(result)).join('');
+  document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart);
+}
