@@ -1,6 +1,6 @@
-const backdrop = document.querySelector('.backdrop');
+export const backdrop = document.querySelector('.backdrop');
 
-export default function renderModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview }) {
+export function renderModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview }) {
     const markup = `<div class="modal">
                         <button type="button" class="modal__btn-close" data-modal-close>
                             <svg class="modal__icon-close" width="14" height="14">
