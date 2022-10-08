@@ -10,7 +10,7 @@ apiService.fetchImage().then(data => {
 function addArticleImage(data) { 
     // console.log(data.results);
     const cart = data.results.map(result => onCard(result)).join("");
-    document.querySelector(`body`).insertAdjacentHTML("beforeend", cart)
+    document.querySelector(`.home-page`).insertAdjacentHTML("beforeend", cart)
      
     
      
