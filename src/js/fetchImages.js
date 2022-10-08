@@ -1,5 +1,5 @@
 import ApiService from "./api-service";
-import onCart from "./cart";
+import onCard from "./card";
 
 const apiService = new ApiService ();
 
@@ -9,7 +9,7 @@ apiService.fetchImage().then(data => {
 
 function addArticleImage(data) { 
     // console.log(data.results);
-    const cart = data.results.map(result => onCart(result)).join("");
+    const cart = data.results.map(result => onCard(result)).join("");
     document.querySelector(`body`).insertAdjacentHTML("beforeend", cart)
      
     
