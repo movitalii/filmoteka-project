@@ -1,5 +1,4 @@
 .container {
-  // border: 1px solid tomato; // ! need to be removed
   margin-right: auto;
   margin-left: auto;
 
@@ -17,7 +16,5 @@
 
   @include mq(desktop) {
     width: 1280px;
-    padding-right: 32px;
-    padding-left: 32px;
   }
 }
