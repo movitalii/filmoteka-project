@@ -1,3 +1,16 @@
 :root {
-    --primary-text-color: #000000;
+  --primary-text-color: #000000;
 }
+
+$mainColor: #000000;
+$secondaryColor: #ffffff;
+$mainAccentColor: #ff6b08;
+$secondaryAccentColor: #ff001b;
+
+$headerHoverColor: #a1a1a2;
+
+$headerGradient: linear-gradient(
+  to right,
+  rgba(0, 0, 0, 0.56),
+  rgba(0, 0, 0, 0.56)
+);
