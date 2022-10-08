@@ -1,49 +1,45 @@
-import Notiflix from 'notiflix';
-import movieSearchByName from './service_api.js';
+import { movieSearchByName } from './service_api';
 
-const refs = {
-    formEl: document.querySelector('#form-search'),
-    inputEl: document.querySelector('input'),
-}
+import renderFilmsMarkup from './templates/renderFilmsMarkup';
 
-const { formEl, inputEl } = refs;
+const searchFormRef = document.querySelector('.form-group');
+const galleryRef = document.querySelector('.gallery');
+const paginationRef = document.querySelector('#pagination');
+const errorMessage = document.querySelector('.error-notification');
+const filmsApi = new movieSearchByName();
 
-let inputValue = '';
-let userSearch = '';
-let totalHits = 0;
-let page = 0;
-let itemArr = [];
+searchFormRef.addEventListener('submit', onFormSubmit);
 
-inputEl.addEventListener('input', onInput);
-function onInput(evt) {
-    inputValue = evt.currentTarget.value;
-    return;
-}
+async function onFormSubmit(evt) {
+  evt.preventDefault();
 
-formEl.addEventListener('submit', onSubmit);
-function onSubmit(evt) {
-    evt.preventDefault();
-    userSearch = inputValue;
-    page = 1;
-    if (!userSearch) {
-        deletePhotoMarkup();
-        return;
+  try {
+    filmsApi.searchQuery = evt.currentTarget.elements.searchQuery.value.trim();
+    if (filmsApi.searchQuery === '') return;
+
+    const films = await filmsApi.fetchMoviesByKeyword();
+    if (films.length === 0) {
+      addErrorStyles();
+      errorMessage.style.display = 'block';
+    } else {
+      resetErrorStyles();
     }
-    deletePhotoMarkup();
-    movieSearchByName(userSearch, page)
-        .then(search => {
-            totalHits = search.data.totalHits;
-            if (totalHits > 0) {
-                Notiflix.Notify.info(`Hooray! We found ${totalHits} films.`);
-                renderPhotoMarkup(search);
-                scrollStart();
-            }
-            itemArr = search.data.hits;
-            if (!itemArr.length) {
-                return Notiflix.Notify.failure(
-                    'Sorry, there are no films matching your search query. Please try again.'
-                );
-            }
-        })
-        .catch(error => console.log(error));
+    renderFilmsMarkup(films);
+
+    searchFormRef.reset();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function resetErrorStyles() {
+  galleryRef.classList.remove('wrong');
+  paginationRef.style.display = 'flex';
+  errorMessage.style.display = 'none';
+}
+
+export function addErrorStyles() {
+  galleryRef.classList.add('wrong');
+  paginationRef.style.display = 'none';
+  errorMessage.style.display = 'block';
 }
