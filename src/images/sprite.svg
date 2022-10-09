@@ -28,6 +28,10 @@
                 fill="#FF6B08" />
         </symbol>
 
+        <symbol id="close-icon" viewBox="0 0 16 16">
+              <path fill="none" d="m1 1 14 14M1 15 15 1" stroke="#000" stroke-width="2"/>
+        </symbol>
+
         <symbol id="search-icon" viewBox="0 0 30 30">
             <path fill="none" stroke="#fff" style="stroke:var(--color3, #fff)" stroke-linejoin="round"
                 stroke-linecap="round" stroke-width="2.667"
