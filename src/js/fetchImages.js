@@ -8,7 +8,10 @@ apiService.fetchImage().then(data => {
 });
 
 function addArticleImage(data) {
-  // console.log(data.results);
-  const cart = data.results.map(result => onCard(result)).join('');
+  console.log('data')
+  console.log(data.results);
+  const cart = data.results.map(result => onCard(result)
+   ).join('');
+    // console.log('cart', cart)
   document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart);
 }

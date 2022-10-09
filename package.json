@@ -4,7 +4,7 @@
   "description": "",
   "homepage": "https://movitalii.github.io/filmoteka-project/",
   "scripts": {
-    "start": "parcel src/*.html",
+    "start": "parcel src/*.html --open",
     "build": "parcel build src/*.html --public-url /filmoteka-project/"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^1.1.2",
     "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.5",
     "tui-pagination": "^3.4.1"
   },
   "devDependencies": {
