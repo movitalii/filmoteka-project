@@ -1,17 +1,15 @@
-.cart {
-    // @include mq (mobile) {
-    // width: 280px;   
-    // }
-    // @include mq (tablet) {
-    //     width: 336px;
-       
-    // }
+.card {
+   
     @include mq (desktop) {
         width: 395px;    
 
         font-size: 20px;
         line-height: 1.2;
        
+    }
+    &_item {
+        display: flex;
+        align-items: stretch;
     }
     &_image {
         border-radius: 5px;
@@ -31,6 +29,14 @@
                 height: 574px;      
             }
     }
+    &_year{
+        height: 12px;
+        padding-left: 5px;
+        border-left: 2px solid #ff6b08;
+
+        color: #ff6b08;
+
+    }
     &_name {
         margin: 0;
 
@@ -44,33 +50,27 @@
        
     }
     &_title {
+        padding-right: 5px;
 
         font-style: normal;
         font-weight: 500;
         font-size: 12px;
+        
         line-height: 1.33;
         
 
         color: $text_color;
     }
-    &_span {
-        padding-left: 5px;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 1.33;
-        border-left: 1.5px solid $text_color;
-
-        color: $text_color;
-
-    }
-    &_span-rating {
+   
+    &_rating {
         width: 36px;
         height: 16px;
         border-radius: 5px;
+        text-align: center;
+        
         margin-left: 5px;
 
-            background-color: $text_color;
+        background-color: $text_color;
         font-style: normal;
         font-weight: 500;
         font-size: 12px;
