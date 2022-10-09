@@ -1,12 +1,12 @@
-import { movieSearchByName } from './service_api';
+// import { movieSearchByName } from './service_api';
 
+import { API_service } from './apiSevice';
 import renderFilmsMarkup from './templates/renderFilmsMarkup';
 
 const searchFormRef = document.querySelector('.form-group');
-const galleryRef = document.querySelector('.gallery');
-const paginationRef = document.querySelector('#pagination');
 const errorMessage = document.querySelector('.error-notification');
-const filmsApi = new movieSearchByName();
+// const filmsApi = new movieSearchByName();
+const filmsApi = new API_service();
 
 searchFormRef.addEventListener('submit', onFormSubmit);
 
@@ -30,16 +30,4 @@ async function onFormSubmit(evt) {
   } catch (error) {
     console.log(error);
   }
-}
-
-export function resetErrorStyles() {
-  galleryRef.classList.remove('wrong');
-  paginationRef.style.display = 'flex';
-  errorMessage.style.display = 'none';
-}
-
-export function addErrorStyles() {
-  galleryRef.classList.add('wrong');
-  paginationRef.style.display = 'none';
-  errorMessage.style.display = 'block';
 }
