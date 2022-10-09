@@ -36,6 +36,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 
     margin: 20px;
 
@@ -50,6 +51,10 @@
 
         width: calc((100% - 240px) / 4);
     }
+}
+
+.team-card:nth-child(9) {
+    margin-left: 220px;
 }
 
 .team-image {
@@ -79,10 +84,6 @@
 }
 
 .team-git {
-    position: absolute;
-
-    top: 65px;
-    right: -10px;
 
     @media screen and (min-width: 268px) {
         top: 100px;
@@ -93,10 +94,12 @@
     }
 
     transform: scale(1);   
+        transition: transform,
+        250ms cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover,
     &:focus {
-        transform: scale(1.5);
+        transform: scale(1.1);
     }
 }
 
