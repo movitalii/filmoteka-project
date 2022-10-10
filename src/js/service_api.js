@@ -9,7 +9,7 @@ const getPopularMovies = async (page = 1) => {
   const { data } = await axios.get(
     `/movie/popular?api_key=${KEY}&page=${page}`
   );
-  console.log(data.results);
+  // console.log(data.results);
   return data;
 };
 // search movie https://developers.themoviedb.org/3/search/search-movies
@@ -17,21 +17,21 @@ const movieSearchByName = async (query, page) => {
   const { data } = await axios.get(
     `/search/movie?api_key=${KEY}&language=en-US&query=${query}&page=${page}`
   );
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
 // get details https://developers.themoviedb.org/3/movies/get-movie-details
 const getMovieDetails = async id => {
   const { data } = await axios.get(`/movie/${id}?api_key=${KEY}`);
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
 // get genres https://developers.themoviedb.org/3/genres/get-movie-list
 const getMovieGenres = async () => {
   const { data } = await axios.get(`/genre/movie/list?api_key=${KEY}`);
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
