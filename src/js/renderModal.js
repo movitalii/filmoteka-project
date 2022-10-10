@@ -1,10 +1,11 @@
 export const backdrop = document.querySelector('.backdrop');
+import iconUrl from '../images/sprite.svg';
 
 export function renderModal({ poster_path, title, vote_average, vote_count, popularity, original_title, overview }) {
     const markup = `<div class="modal">
                         <button type="button" class="modal__btn-close" data-modal-close>
-                            <svg class="modal__icon-close" width="14" height="14">
-                            <use href="../images/sprite.svg#close-icon"></use>
+                            <svg class="icon-close" width="14" height="14">
+                            <use href="${iconUrl}#close-icon"></use>
                             </svg>
                         </button>
 
