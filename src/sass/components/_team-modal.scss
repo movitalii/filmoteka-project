@@ -30,8 +30,7 @@
     }
 }
 
-.team-card {
-    position: relative;
+.team-card {   
 
     display: flex;
     flex-direction: column;
@@ -64,6 +63,8 @@
 }
 
 .team-image {
+    z-index: 100;
+    position: relative;
     margin-bottom: 10px;
 
     width: 100%;
@@ -89,7 +90,7 @@
     color: #545454;
 }
 
-.team-git {
+.team-link {
 
     transition: transform, 250ms cubic-bezier(0.4, 0, 0.2, 1);
     
@@ -108,3 +109,30 @@
 
     cursor: pointer;
 }
+
+.github__icon {
+    @media screen and (max-width: (768px - 1)) {
+            display: none;
+        }
+
+    z-index: 50;
+    position: absolute;
+    top: 93px;
+    left: 93px;  
+    
+    transform: translate(0px, 0px);
+    transition: transform, 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-card:hover,
+.team-card:focus {
+    .github__icon {
+
+            transform: translate(15px, 55px);
+
+        }
+}
+
+    
+
+
