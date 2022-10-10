@@ -30,7 +30,7 @@ function addArticleImage(data) {
       genres.forEach(genOBJ => {
         // console.log(genOBJ)
         if (genreID === genOBJ.id) {
-          genresArr.push(`${genOBJ.name}`);
+          genresArr.push(` ${genOBJ.name}`);
           // console.log(genresArr)
         }
       });
@@ -38,12 +38,12 @@ function addArticleImage(data) {
     
     if (genresArr.length > 3) {
       genresArr = genresArr.slice(0, 2);
-      genresArr.push(' other..');
+      genresArr.push(' Other...');
            
     } 
     if (genresArr.length === 0) {
       
-      genresArr.push('no genres');
+      genresArr.push('No genres');
     }
     result.genre_ids = genresArr;
     // console.log(result)

@@ -5,7 +5,7 @@ export default function onCard({poster_path, name, title, genre_ids, release_dat
     <h2 class="card_name">${name||title}</h2>
     <div class='card_text'>
       <p class="card_title">${genre_ids }</p>
-      <p class='card_year'>${
+      <p class='card_year'> | ${
         release_date ? release_date.slice(0, 4) : first_air_date.slice(0, 4)
       }</p>      
     </div>
