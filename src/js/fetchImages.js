@@ -1,6 +1,8 @@
 import ApiService from './api-service';
 import onCard from './card';
-
+// Ed import//
+import { saveInfo, getInfo, removeInfo } from './storage_api';
+/////////////
 const apiService = new ApiService();
 const GENRE_NAME   = 'genre_card';
 
@@ -11,6 +13,7 @@ apiService.fetchGenres().then(data => {
 });
 
 apiService.fetchImage().then(data => {
+  saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
   addArticleImage(data);
 });
 const genreName = localStorage.getItem(GENRE_NAME);

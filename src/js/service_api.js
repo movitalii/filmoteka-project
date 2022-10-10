@@ -35,9 +35,9 @@ const getMovieGenres = async () => {
   return data;
 };
 
-getPopularMovies(4);
-movieSearchByName('Memory', 2);
-getMovieDetails(120);
-getMovieGenres();
+// getPopularMovies(4);
+// movieSearchByName('Memory', 2);
+// getMovieDetails(120);
+// getMovieGenres();
 
 export { getMovieDetails, movieSearchByName, getPopularMovies, getMovieGenres };
