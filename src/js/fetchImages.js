@@ -6,16 +6,24 @@ import { saveInfo, getInfo, removeInfo } from './storage_api';
 const apiService = new ApiService();
 const GENRE_NAME   = 'genre_card';
 
+let genres = []
 apiService.fetchGenres().then(data => {
-  const genres = data.genres
-  localStorage.setItem(GENRE_NAME, JSON.stringify(genres))
+   genres = data.genres
+   localStorage.setItem(GENRE_NAME, JSON.stringify(genres))
+
 //  console.log('ok', data.genres);
 });
+localStorage.setItem(GENRE_NAME, JSON.stringify(genres))
+const genreName = localStorage.getItem(GENRE_NAME);
+  console.log('genre', genreName)
+  genres = JSON.parse(genreName);  
 
+const isSuccess = true;
 apiService.fetchImage().then(data => {
-
+  
+  addArticleImage(data); 
   saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
-  addArticleImage(data);
+ 
 });
 
 
@@ -33,17 +41,15 @@ function onFundName() {
 }
 onFundName()
 
-const genreName = localStorage.getItem(GENRE_NAME);
-  // console.log('genre', genreName)
-  const genres = JSON.parse(genreName);  
 
+ 
 function addArticleImage(data) {
   
   // console.log('image', data);
   const cart = data.results.map(result => {
     let genresArr = [];
     result.genre_ids.forEach(genreID => {
-      // console.log(genreID)
+      console.log(genreID)
       genres.forEach(genOBJ => {
         // console.log(genOBJ)
         if (genreID === genOBJ.id) {
