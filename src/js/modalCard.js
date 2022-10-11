@@ -5,11 +5,16 @@ const cardGallery = document.querySelector('.gallery');
 import fetchImages from './fetchImages';
 import onCard from './card';
 import { getInfo, saveInfo } from './storage_api';
+
+//refs
 const refs = {
   renderModal: document.querySelector('.gallery'),
 };
+
+
 const apiService = new ApiService();
 refs.renderModal.addEventListener('click', showCard);
+
 
 function showCard(e) {
   e.preventDefault();
