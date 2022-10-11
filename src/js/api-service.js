@@ -54,7 +54,7 @@ export default class ApiService {
   async fetchFundFilms() {
     spinner.removeAttribute('hidden');
     const response = await axios.get(
-      `${BASE_URL}search/movie?api_key=${API_KEY}&query=${this.#searchQuery}`
+      `${BASE_URL}search/movie?api_key=${API_KEY}&query=${this.#searchQuery}&page=${this.page}`
     );
     spinner.setAttribute('hidden', '');
     const FundFilm = response.data;
