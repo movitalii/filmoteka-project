@@ -10,9 +10,4 @@ import './js/search-bar';
 import './js/storage_api';
 import './js/fetchImages';
 import './js/modal';
-
-
-
 import './js/modalCard';
-
-
