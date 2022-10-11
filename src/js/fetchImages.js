@@ -26,8 +26,6 @@ apiService.fetchImage().then(data => {
  
 });
 
-
-
 function onIdFilms() {
   apiService.id = 89;
   apiService.fetchAllFilms();
