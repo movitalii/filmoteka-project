@@ -48,8 +48,8 @@ function fetchGallery(params) {
           });
           element.genre_ids = newArr;
           renderModal(element);
-          watched = document.querySelector('#watched');
-          queued = document.querySelector('#queue');
+          let watched = document.querySelector('#watched');
+          let queued = document.querySelector('#queue');
           // тут немного по ебанутому сделал, но так работает
           watched.addEventListener('click', e => {
             let lsArray = getInfo('watched');
