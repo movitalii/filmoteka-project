@@ -15,7 +15,7 @@ apiService.fetchGenres().then(data => {
 });
 localStorage.setItem(GENRE_NAME, JSON.stringify(genres))
 const genreName = localStorage.getItem(GENRE_NAME);
-  console.log('genre', genreName)
+  // console.log('genre', genreName)
   genres = JSON.parse(genreName);  
 
 const isSuccess = true;
@@ -33,11 +33,11 @@ function onIdFilms() {
 onIdFilms()
 
 
-function onFundName() {
-  apiService.query = 'cat';
-  apiService.fetchFundFilms();
-}
-onFundName()
+// function onFundName() {
+//   apiService.query = 'cat';
+//   apiService.fetchFundFilms();
+// }
+// onFundName()
 
 
  
@@ -47,7 +47,7 @@ function addArticleImage(data) {
   const cart = data.results.map(result => {
     let genresArr = [];
     result.genre_ids.forEach(genreID => {
-      console.log(genreID)
+      // console.log(genreID)
       genres.forEach(genOBJ => {
         // console.log(genOBJ)
         if (genreID === genOBJ.id) {

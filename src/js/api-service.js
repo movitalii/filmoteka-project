@@ -11,8 +11,7 @@ export default class ApiService {
     this.page = 1;
     this.#id = null;
     this.#searchQuery = '';
-    console.log('searchQuery', this.#searchQuery);
-    console.log('id', this.#id);
+   
   }
 
   async fetchGenres() {
@@ -48,7 +47,7 @@ export default class ApiService {
     const allFilm = response.data;
 
     this.page += 1;
-    console.log('all', allFilm);
+    // console.log('all', allFilm);
     return allFilm;
   }
 
