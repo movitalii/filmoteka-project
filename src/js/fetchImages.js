@@ -13,16 +13,33 @@ apiService.fetchGenres().then(data => {
 });
 
 apiService.fetchImage().then(data => {
+
   saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
   addArticleImage(data);
 });
+
+
+
+function onIdFilms() {
+  apiService.id = 89;
+  apiService.fetchAllFilms();
+}
+onIdFilms()
+
+
+function onFundName() {
+  apiService.query = 'cat';
+  apiService.fetchFundFilms();
+}
+onFundName()
+
 const genreName = localStorage.getItem(GENRE_NAME);
   // console.log('genre', genreName)
   const genres = JSON.parse(genreName);  
 
 function addArticleImage(data) {
   
-  console.log(data.results);
+  // console.log('image', data);
   const cart = data.results.map(result => {
     let genresArr = [];
     result.genre_ids.forEach(genreID => {
@@ -47,11 +64,11 @@ function addArticleImage(data) {
     }
     result.genre_ids = genresArr;
     // console.log(result)
-    console.log('odject', Object.values(result.genre_ids)) 
+    // console.log('odject', Object.values(result.genre_ids)) 
     
     
     return result;
   } ).map(result => onCard(result)).join('');
-    console.log('cart', cart)
+    // console.log('cart', cart)
   document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart);
 }

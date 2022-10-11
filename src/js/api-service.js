@@ -1,55 +1,86 @@
-import axios from "axios";
+import axios from 'axios';
+
+const API_KEY = '3ff086ca8fded08ba42938358b3327b4';
+const BASE_URL = `https://api.themoviedb.org/3/`;
+const spinner = document.getElementById('spinner');
+
 export default class ApiService {
-    constructor (){
-        this.images = '';
-        this.page = 1;
-        this.id = null;
-    }   
+  #id;
+  #searchQuery;
+  constructor() {
+    this.page = 1;
+    this.#id = null;
+    this.#searchQuery = '';
+    console.log('searchQuery', this.#searchQuery);
+    console.log('id', this.#id);
+  }
 
-    async fetchGenres() {
-        const options = {
-        key: `3ff086ca8fded08ba42938358b3327b4`,      
-       
-        };
-        const BASE_URL = `https://api.themoviedb.org/3/genre/movie/list`
-        let  {key} = options;
-       
-         const response  = await axios.get(`${BASE_URL}?api_key=${key}&language=en-US`)
-          const {genres} = response.data;          
-            console.log('id', [{genres}].id)
-            this.page += 1;        
-            // genre_ids
-            // console.log(genres)
-            return {genres};
-         };    
+  async fetchGenres() {
+    const response = await axios.get(
+      `${BASE_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`
+    );
+    const { genres } = response.data;
 
-     async fetchImage() {
-        const options = {
-        key: `3ff086ca8fded08ba42938358b3327b4`,      
-       
-        };
-        const BASE_URL = `https://api.themoviedb.org/3/trending/all/day`
-        let  {key} = options;
-       
-         const response  = await axios.get(`${BASE_URL}?api_key=${key}`)
-          const data = response.data;          
-         
-            this.page += 1;        
-     console.log(data.results)
-            return data;
-         }; 
-         
-         
-   
-     clearForm() {
-        this.page = 1;
-    }
+    this.page += 1;
 
-    get searchQuery() {
-        return this.images;
-    }
-    set searchQuery(newSearchQuery){
-        this.images = newSearchQuery;
-    }
-    
-};
+    return { genres };
+  }
+
+  async fetchImage() {
+    spinner.removeAttribute('hidden');
+    const response = await axios.get(
+      `${BASE_URL}trending/all/day?api_key=${API_KEY}`
+    );
+    spinner.setAttribute('hidden', '');
+    const data = response.data;
+
+    this.page += 1;
+    //  console.log('data', data.results)
+    return data;
+  }
+
+  async fetchAllFilms() {
+    spinner.removeAttribute('hidden');
+    const response = await axios.get(
+      `${BASE_URL}movie/${this.#id}?api_key=${API_KEY}&language=en-US`
+    );
+    spinner.setAttribute('hidden', '');
+    const allFilm = response.data;
+
+    this.page += 1;
+    console.log('all', allFilm);
+    return allFilm;
+  }
+
+  async fetchFundFilms() {
+    spinner.removeAttribute('hidden');
+    const response = await axios.get(
+      `${BASE_URL}search/movie?api_key=${API_KEY}&query=${this.#searchQuery}`
+    );
+    spinner.setAttribute('hidden', '');
+    const FundFilm = response.data;
+
+    this.page += 1;
+
+    console.log('fund', FundFilm);
+    return FundFilm;
+  }
+
+  clearForm() {
+    this.page = 1;
+  }
+
+  get query() {
+    return this.searchQuery;
+  }
+  set query(newQuery) {
+    this.#searchQuery = newQuery;
+  }
+
+  get id() {
+    return this.id;
+  }
+  set id(newId) {
+    this.#id = newId;
+  }
+}

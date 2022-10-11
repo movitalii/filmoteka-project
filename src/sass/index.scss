@@ -16,6 +16,7 @@
 @import './components/form-group';
 @import './components/error-notification';
 @import './components/team-modal';
+@import './components/spinner';
 
 /* Layouts*/
 @import './layouts/home-page';
@@ -24,4 +25,5 @@
 @import './layouts/header-home';
 @import './layouts/header-library';
 @import './layouts/modal';
-@import './components/pagination'
+@import './components/pagination';
+// @import './layouts/spinner'
