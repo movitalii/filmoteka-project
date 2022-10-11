@@ -16,7 +16,7 @@ const stringKey = keyOfLocalStorage.toString();
 
 let arrayToRender = [];
 arrayToRender = getInfo(stringKey);
-console.log(arrayToRender);
+// console.log(arrayToRender);
 
 
 // --------
@@ -64,7 +64,7 @@ function addArticleImage(data) {
     }
     result.genre_ids = genresArr;
     // console.log(result)
-    console.log('odject', Object.values(result.genre_ids)) 
+    // console.log('odject', Object.values(result.genre_ids)) 
     
     
     return result;
