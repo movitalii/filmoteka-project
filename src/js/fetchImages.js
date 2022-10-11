@@ -4,7 +4,7 @@ import onCard from './card';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
 /////////////
 const apiService = new ApiService();
-const GENRE_NAME   = 'genre_card';
+const GENRE_NAME = 'genre_card';
 
 let genres = []
 apiService.fetchGenres().then(data => {
