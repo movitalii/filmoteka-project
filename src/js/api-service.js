@@ -1,55 +1,76 @@
 import axios from "axios";
-export default class ApiService {
-    constructor (){
-        this.images = '';
-        this.page = 1;
-        this.id = null;
-    }   
 
-    async fetchGenres() {
-        const options = {
-        key: `3ff086ca8fded08ba42938358b3327b4`,      
+const API_KEY = '3ff086ca8fded08ba42938358b3327b4';
+const BASE_URL = `https://api.themoviedb.org/3/`;
+
+export default class ApiService {
+   #id
+    #searchQuery;
+    constructor (){
        
-        };
-        const BASE_URL = `https://api.themoviedb.org/3/genre/movie/list`
-        let  {key} = options;
+        this.page = 1;
+        this.#id = null;
+        this.#searchQuery = '';   
+        console.log('searchQuery', this.#searchQuery)
+        console.log('id', this.#id)
+     }   
+
+    async fetchGenres() {      
        
-         const response  = await axios.get(`${BASE_URL}?api_key=${key}&language=en-US`)
+         const response  = await axios.get(`${BASE_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`)
           const {genres} = response.data;          
-            console.log('id', [{genres}].id)
+          
             this.page += 1;        
-            // genre_ids
-            // console.log(genres)
+           
             return {genres};
          };    
 
-     async fetchImage() {
-        const options = {
-        key: `3ff086ca8fded08ba42938358b3327b4`,      
-       
-        };
-        const BASE_URL = `https://api.themoviedb.org/3/trending/all/day`
-        let  {key} = options;
-       
-         const response  = await axios.get(`${BASE_URL}?api_key=${key}`)
+     async fetchImage() {       
+        
+         const response  = await axios.get(`${BASE_URL}trending/all/day?api_key=${API_KEY}`)
           const data = response.data;          
          
             this.page += 1;        
-     console.log(data.results)
+    //  console.log('data', data.results)
             return data;
-         }; 
+         };        
          
-         
+         async fetchAllFilms() {                  
+            
+             const response  = await axios.get(`${BASE_URL}movie/${this.#id}?api_key=${API_KEY}&language=en-US`)
+            const allFilm = response.data;          
+             
+                this.page += 1;        
+         console.log('all', allFilm)
+                return allFilm;
+             }; 
+
+             async fetchFundFilms() {               
+              
+                 const response  = await axios.get(`${BASE_URL}search/movie?api_key=${API_KEY}&query=${this.#searchQuery}`)
+                const FundFilm = response.data;          
+                 
+                    this.page += 1; 
+
+             console.log('fund', FundFilm)
+                    return FundFilm;
+                 }; 
    
      clearForm() {
         this.page = 1;
     }
 
-    get searchQuery() {
-        return this.images;
+    get query() {
+        return this.searchQuery;
     }
-    set searchQuery(newSearchQuery){
-        this.images = newSearchQuery;
+    set query(newQuery){
+        this.#searchQuery = newQuery;
     }
-    
+   
+    get id() {
+        return this.id;
+    }
+    set id(newId){
+        this.#id= newId;
+    }
 };
