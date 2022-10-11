@@ -49,7 +49,7 @@ export class API_service {
           language: this.language,
         },
       });
-
+      console.log('C', data.results)
       Loading.remove();
 
       return data.results;
@@ -71,6 +71,7 @@ export class API_service {
           language: this.language,
         },
       });
+      console.log('C', data)
       Loading.remove();
 
       return data;

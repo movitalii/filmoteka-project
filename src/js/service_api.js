@@ -17,14 +17,14 @@ const movieSearchByName = async (query, page) => {
   const { data } = await axios.get(
     `/search/movie?api_key=${KEY}&language=en-US&query=${query}&page=${page}`
   );
-  // console.log(data);
+  console.log('by name', data);
   return data;
 };
 
 // get details https://developers.themoviedb.org/3/movies/get-movie-details
 const getMovieDetails = async id => {
   const { data } = await axios.get(`/movie/${id}?api_key=${KEY}`);
-  // console.log(data);
+  console.log('ED', data);
   return data;
 };
 
