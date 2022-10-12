@@ -3,7 +3,7 @@ import ApiService from './api-service';
 import onCard from './card';
 import renderFilmsMarkup from './templates/renderFilmsMarkup';
 
-const GENRE_NAME = 'genre_card';
+const FUND_NAME = 'genre_card';
 
 const searchFormRef = document.querySelector('#form-search');
 const errorMessage = document.querySelector('.error-notification');
@@ -17,6 +17,10 @@ console.log(searchFormRef);
 
 function onFormSubmit(e) {
   e.preventDefault();
+
+  const genreName = localStorage.getItem(FUND_NAME);
+  console.log('genre', genreName)
+  genres = JSON.parse(genreName);  
  
   apiService.query = e.currentTarget.elements.searchQuery.value;
   cleanView()
@@ -35,11 +39,7 @@ function onFormSubmit(e) {
    
   }
 
-  const genreName = localStorage.getItem(GENRE_NAME);
-  // console.log('genre', genreName)
-  genres = JSON.parse(genreName);  
-
-
+  
   function onMovesCard(data) {
   
     // console.log('image', data);
