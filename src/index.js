@@ -11,3 +11,4 @@ import './js/storage_api';
 import './js/fetchImages';
 import './js/modal';
 import './js/modalCard';
+import './js/scroll-up-btn';
