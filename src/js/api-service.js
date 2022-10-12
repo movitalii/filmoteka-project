@@ -5,10 +5,11 @@ const BASE_URL = `https://api.themoviedb.org/3/`;
 const spinner = document.getElementById('spinner');
 
 export default class ApiService {
+    #page
   #id;
   #searchQuery;
   constructor() {
-    this.page = 1;
+    this.#page = 1;
     this.#id = null;
     this.#searchQuery = '';
    
@@ -20,20 +21,17 @@ export default class ApiService {
     );
     const { genres } = response.data;
 
-    this.page += 1;
-
     return { genres };
   }
 
   async fetchImage() {
     spinner.removeAttribute('hidden');
     const response = await axios.get(
-      `${BASE_URL}trending/all/day?api_key=${API_KEY}`
+      `${BASE_URL}trending/all/day?api_key=${API_KEY}&page=${this.#page}`
     );
     spinner.setAttribute('hidden', '');
     const data = response.data;
 
-    this.page += 1;
     //  console.log('data', data.results)
     return data;
   }
@@ -46,7 +44,6 @@ export default class ApiService {
     spinner.setAttribute('hidden', '');
     const allFilm = response.data;
 
-    this.page += 1;
     // console.log('all', allFilm);
     return allFilm;
   }
@@ -54,14 +51,12 @@ export default class ApiService {
   async fetchFundFilms() {
     spinner.removeAttribute('hidden');
     const response = await axios.get(
-      `${BASE_URL}search/movie?api_key=${API_KEY}&query=${this.#searchQuery}&page=${this.page}`
+
+      `${BASE_URL}search/movie?api_key=${API_KEY}&page=${this.#page}&query=${this.#searchQuery}`
     );
     spinner.setAttribute('hidden', '');
     const FundFilm = response.data;
 
-    this.page += 1;
-
-    console.log('fund', FundFilm);
     return FundFilm;
   }
 
@@ -81,5 +76,11 @@ export default class ApiService {
   }
   set id(newId) {
     this.#id = newId;
+  }
+  get pagePl() {
+    return this.page;
+  }
+  set pagePl(newPage) {
+    this.#page = newPage;
   }
 }

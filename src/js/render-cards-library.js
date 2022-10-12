@@ -39,7 +39,7 @@ const genreName = localStorage.getItem(GENRE_NAME);
 
 function addArticleImage(data) {
   
-  console.log(data.results);
+  // console.log(data.results);
   const cart = data.results.map(result => {
     let genresArr = [];
     result.genre_ids.forEach(genreID => {
@@ -69,6 +69,6 @@ function addArticleImage(data) {
     
     return result;
   } ).map(result => onCard(result)).join('');
-    console.log('cart', cart)
+    // console.log('cart', cart)
   document.querySelector(`.library`).insertAdjacentHTML('beforeend', cart);
 }

@@ -4,17 +4,15 @@ import { renderModal, backdrop } from './renderModal';
 const cardGallery = document.querySelector('.gallery');
 import fetchImages from './fetchImages';
 import onCard from './card';
-import { getInfo, saveInfo } from './storage_api';
+import { getInfo, saveInfo, removeInfo } from './storage_api';
 
 //refs
 const refs = {
   renderModal: document.querySelector('.gallery'),
 };
 
-
 const apiService = new ApiService();
 refs.renderModal.addEventListener('click', showCard);
-
 
 function showCard(e) {
   e.preventDefault();
@@ -53,13 +51,30 @@ function fetchGallery(params) {
           // тут немного по ебанутому сделал, но так работает
           watched.addEventListener('click', e => {
             let lsArray = getInfo('watched');
-            if (lsArray) {
-              lsArray.push(element);
-              saveInfo('watched', lsArray);
-            } else {
+            if (!lsArray) {
               saveInfo('watched', [element]);
             }
-            console.log('watched pressed');
+            if (lsArray.length == 0) {
+              saveInfo('watched', [element]);
+            }
+            if (lsArray.length >= 1) {
+              lsArray.forEach(elem => {
+                if (elem.id == element.id) {
+                  console.log('it Exist');
+                  const index = lsArray.indexOf(elem);
+                  // console.log(index);
+                  lsArray.splice(index, 1);
+                  // console.log(lsArray);
+                  removeInfo('watched');
+                  saveInfo('watched', lsArray);
+                } else {
+                  lsArray.push(element);
+                  saveInfo('watched', lsArray);
+                }
+              });
+            }
+
+            // console.log('watched pressed');
           });
           // и тут немного костыльно
           queued.addEventListener('click', e => {
