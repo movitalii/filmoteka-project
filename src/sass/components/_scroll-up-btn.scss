@@ -7,6 +7,26 @@
     width: 50px;
     height: 50px;
 
+    animation-name: up;
+        animation-duration: 1000ms;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    
+    
+        @keyframes up {
+            0% {
+                    transform: translateY(0);
+            }
+        
+            50% {
+                transform: translateY(-10px);
+            }
+        
+            100% {
+                transform: translateY(0);
+            }
+        }
+
     @include mq(mobile) {
         width: 30px;
         height: 30px;
@@ -21,30 +41,37 @@
     }
 
     z-index: 1;
-    background-color: transparent;
+    background-color: #ff6b08;
     color:  #ff6b08;
-    border: 2px solid #ff6b08;
     transition: color 300ms ease-in-out;
 
     &:hover {
-        color: #FFFFFF;
-        border: 2px solid #FFFFFF;
+        background-color: #FFFFFF;   
+        .scroll-img {
+                fill: #ff6b08;
+            }
         
         transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 10px 20px #FF6B08;
+        box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
+            -webkit-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
+            -moz-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
     }
 
     &:active {
+        .scroll-img {
+                fill: #ff6b08;
+            }
         transform: translateY(-1px);
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 5px 10px #FF6B08;
+        box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
+            -webkit-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
+            -moz-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
     }
 }
 
 .scroll-img {
-    fill:#FF6B08;
+    fill: #FFFFFF;
     width: 20px;
     height: 20px;
     cursor: pointer;
 }
+
