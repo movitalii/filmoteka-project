@@ -18,7 +18,7 @@ const genreName = localStorage.getItem(GENRE_NAME);
   // console.log('genre', genreName)
   genres = JSON.parse(genreName);  
 
-const isSuccess = true;
+
 apiService.fetchImage().then(data => {
   
   addArticleImage(data); 

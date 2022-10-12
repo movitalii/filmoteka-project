@@ -1,59 +1,79 @@
-// import { movieSearchByName } from './service_api';
 
 import ApiService from './api-service';
+import onCard from './card';
 import renderFilmsMarkup from './templates/renderFilmsMarkup';
 
-const searchFormRef = document.querySelector('.form-group');
+const GENRE_NAME = 'genre_card';
+
+const searchFormRef = document.querySelector('#form-search');
 const errorMessage = document.querySelector('.error-notification');
 const input = document.querySelector(`.form-group__input`)
-// const filmsApi = new movieSearchByName();
-// const filmsApi = new API_service();
-
-
 
 const apiService = new ApiService();
 
-// function onFundName() {
-//   apiService.query = 'dog';
-//   apiService.fetchFundFilms();
-// }
-// onFundName()
-
-
-searchFormRef.addEventListener('submit', onFormSubmit);
-input.addEventListener(`input`, onFundName)
+searchFormRef.addEventListener('submit', onFormSubmit) ;
 
 console.log(searchFormRef);
 
-function onFundName(e) {
-    apiService.query = e.currentTarget.value;
-    console.log(e.currentTarget.value)
-    apiService.fetchFundFilms();
-  }
+function onFormSubmit(e) {
+  e.preventDefault();
  
+  apiService.query = e.currentTarget.elements.searchQuery.value;
+  cleanView()
+  
+  console.log(e.currentTarget.value);
+  
+    apiService.fetchFundFilms();
 
-function onFormSubmit(evt) {
-  evt.preventDefault();
-  // console.log(evn)
-  // apiService.query = evt.currentTarget.value;
+    apiService.fetchFundFilms().then(data => {
+      moves = data;    
+   
+    console.log('ok', data);
+    onMovesCard(data);
+   });
+   input.value = '';
+   
+  }
 
-  // apiService.fetchFundFilms();
+  const genreName = localStorage.getItem(GENRE_NAME);
+  // console.log('genre', genreName)
+  genres = JSON.parse(genreName);  
 
-  // try {
-  //   apiService.searchQuery = evt.currentTarget.elements.searchQuery.value.trim();
-  //   if (filmsApi.searchQuery === '') return;
 
-  //   const films = await filmsApi.fetchMoviesByKeyword();
-  //   if (films.length === 0) {
-  //     addErrorStyles();
-  //     errorMessage.style.display = 'block';
-  //   } else {
-  //     resetErrorStyles();
-  //   }
-  //   renderFilmsMarkup(films);
+  function onMovesCard(data) {
+  
+    // console.log('image', data);
+    const cart = data.results.map(result => {
+      let genresArr = [];
+      result.genre_ids.forEach(genreID => {
+        // console.log(genreID)
+        genres.forEach(genOBJ => {
+          // console.log(genOBJ)
+          if (genreID === genOBJ.id) {
+            genresArr.push(` ${genOBJ.name}`);
+            // console.log(genresArr)
+          }
+        });
+      });
+      
+      if (genresArr.length > 3) {
+        genresArr = genresArr.slice(0, 2);
+        genresArr.push(' Other...');
+             
+      } 
+      if (genresArr.length === 0) {
+        
+        genresArr.push('No genres');
+      }
+      result.genre_ids = genresArr;
+      
+      return result;
+    } ).map(result => onCard(result)).join('');
+      // console.log('cart', cart)
+    document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart);
+  }
 
-  //   searchFormRef.reset();
-  // } catch (error) {
-  //   console.log(error);
-  // }
-}
+  function cleanView() {
+
+    document.querySelector(`.gallery`).innerHTML = ``;
+  };
