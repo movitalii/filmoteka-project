@@ -1,14 +1,14 @@
 import ApiService from './api-service';
-import makeFilmsMarkup from './templates/filmsListMarkupTempl';
-// import { API_service } from './apiSevice';
-import createFilmsByGenre from './fetchImages';
-import onPageFilms from './fetchImages';
+// import makeFilmsMarkup from './templates/filmsListMarkupTempl';
+// // import { API_service } from './apiSevice';
+// import createFilmsByGenre from './fetchImages';
+// import addArticleImage from './fetchImages';
 
 const Pagination = require('tui-pagination');
 const apiService = new ApiService();
 // const api_Service = new API_service();
 
-// const gallery = document.querySelector('.gallery');
+const gallery = document.querySelector('.gallery');
 // const insertFilmsMarkupToHome = filmsMarkup =>
 //   gallery.insertAdjacentHTML('beforeend', filmsMarkup);
 
@@ -46,20 +46,18 @@ export function createPagination() {
 
   pagination.on('afterMove', event => {
     // gallery.innerHTML = ''; // создает пустую галерею/стирает предыдущие карточки
-    // api_Service.page = event.page; //
-    // api_Service
-    //   .fetchTrending()
-    //   .then(({ results }) => {
-    //     const markup = makeFilmsMarkup(results);
-    //     // ссылка на галерею
-    //     insertFilmsMarkupToHome(markup);
-    //     localStorage.setItem(`currentFilm`, JSON.stringify(results));
-    //   })
-    //   .catch(error => console.log(error));
+
     const currentPage = event.page;
-    console.log(currentPage);
-    onPageFilms(currentPage);
-    console.log('what', onPageFilms(currentPage));
+    console.log('currentPage', currentPage);
+    // onPageFilms(currentPage);
+    // console.log('what', onPageFilms(currentPage));
+    apiService.page = currentPage;
+    console.log('createPagination -> apiService', apiService);
+    apiService.fetchImage();
+    // apiService.fetchImage().then(data => {
+    //   moves = data;
+    // });
+
     // apiService.page = currentPage;
     // apiService
     //   .fetchImage()
@@ -76,14 +74,3 @@ export function createPagination() {
 
 // createPagination(80);
 console.log('createPagination();', createPagination());
-// console.log(
-//   'try',
-//   api_Service.fetchTrending().then(({ results }) => {
-//     const markup = makeFilmsMarkup(results);
-//     // ссылка на галерею
-//     insertFilmsMarkupToHome(markup);
-//     // localStorage.setItem(`currentFilm`, JSON.stringify(results));
-//   })
-// );
-
-// console.log('try2', apiService());

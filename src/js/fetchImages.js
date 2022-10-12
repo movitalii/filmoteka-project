@@ -30,11 +30,6 @@ function onIdFilms() {
 }
 onIdFilms();
 
-// export default function onPageFilms(e) {
-//   apiService.page = e;
-//   apiService.fetchImage();
-// }
-
 // function onFundName() {
 //   apiService.query = 'cat';
 //   apiService.fetchFundFilms();
