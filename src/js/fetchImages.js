@@ -18,7 +18,7 @@ const genreName = localStorage.getItem(GENRE_NAME);
   // console.log('genre', genreName)
   genres = JSON.parse(genreName);  
 
-const isSuccess = true;
+
 apiService.fetchImage().then(data => {
   
   addArticleImage(data); 
@@ -26,21 +26,6 @@ apiService.fetchImage().then(data => {
  
 });
 
-function onIdFilms() {
-  apiService.id = 89;
-  apiService.fetchAllFilms();
-}
-onIdFilms()
-
-
-// function onFundName() {
-//   apiService.query = 'cat';
-//   apiService.fetchFundFilms();
-// }
-// onFundName()
-
-
- 
 function addArticleImage(data) {
   
   // console.log('image', data);
