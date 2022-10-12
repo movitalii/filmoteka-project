@@ -5,11 +5,16 @@ const cardGallery = document.querySelector('.gallery');
 import fetchImages from './fetchImages';
 import onCard from './card';
 import { getInfo, saveInfo } from './storage_api';
+
+//refs
 const refs = {
   renderModal: document.querySelector('.gallery'),
 };
+
+
 const apiService = new ApiService();
 refs.renderModal.addEventListener('click', showCard);
+
 
 function showCard(e) {
   e.preventDefault();
@@ -43,8 +48,8 @@ function fetchGallery(params) {
           });
           element.genre_ids = newArr;
           renderModal(element);
-          watched = document.querySelector('#watched');
-          queued = document.querySelector('#queue');
+          let watched = document.querySelector('#watched');
+          let queued = document.querySelector('#queue');
           // тут немного по ебанутому сделал, но так работает
           watched.addEventListener('click', e => {
             let lsArray = getInfo('watched');
