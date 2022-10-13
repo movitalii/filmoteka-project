@@ -1,5 +1,6 @@
 .page-action {
   position: relative;
+  width: 100%;
 
   &__theme {
     position: absolute;
@@ -43,7 +44,9 @@ html.light .page-action__theme {
 }
 
 html.dark .card_name,
-html.dark .modal__info-value {
+html.dark .modal__info-value,
+html.dark .content-library__title,
+html.dark .content-library__text {
   color: $secondaryColor;
 }
 
