@@ -1,7 +1,7 @@
 
 import ApiService from './api-service';
-import onCard from './card';
-import renderFilmsMarkup from './templates/renderFilmsMarkup';
+import addArticleImage from './fetchImages';
+import { saveInfo, getInfo, removeInfo } from './storage_api';
 
 const FUND_NAME = 'genre_card';
 
@@ -19,61 +19,49 @@ function onFormSubmit(e) {
   e.preventDefault();
 
   const genreName = localStorage.getItem(FUND_NAME);
-  console.log('genre', genreName)
-  genres = JSON.parse(genreName);  
+  
+ genres = JSON.parse(genreName);  
  
   apiService.query = e.currentTarget.elements.searchQuery.value;
   cleanView()
-  
-  console.log(e.currentTarget.value);
-  
+ 
     apiService.fetchFundFilms();
 
     apiService.fetchFundFilms().then(data => {
-      moves = data;    
-   
-    console.log('ok', data);
-    onMovesCard(data);
-   });
-   input.value = '';
-   
-  }
-
-  
-  function onMovesCard(data) {
-  
-    // console.log('image', data);
-    const cart = data.results.map(result => {
-      let genresArr = [];
-      result.genre_ids.forEach(genreID => {
-        // console.log(genreID)
-        genres.forEach(genOBJ => {
-          // console.log(genOBJ)
-          if (genreID === genOBJ.id) {
-            genresArr.push(` ${genOBJ.name}`);
-            // console.log(genresArr)
-          }
-        });
-      });
-      
-      if (genresArr.length > 3) {
-        genresArr = genresArr.slice(0, 2);
-        genresArr.push(' Other...');
-             
-      } 
-      if (genresArr.length === 0) {
         
-        genresArr.push('No genres');
-      }
-      result.genre_ids = genresArr;
-      
-      return result;
-    } ).map(result => onCard(result)).join('');
-      // console.log('cart', cart)
-    document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart);
+   if(data.results.length === 0){
+    input.value = '';
+   
+ document.querySelector('.error-notification').insertAdjacentHTML('beforeend', 'Search result not successful. Enter the correct movie name and');
+    
+ apiService.fetchImage().then(data => {
+
+  setTimeout(() => {
+    if(document.querySelector(`.error-notification`)) {
+      document.querySelector('.error-notification').innerHTML = '';
+      addArticleImage(data); 
+  saveInfo(data.page, data.results); 
+    }
+  }, 2000);
+  
+});
+ 
+ console.log(cartError)
+    return;
+   }
+    console.log('ok', data.results.length);
+    addArticleImage(data); 
+   });
+  
   }
 
   function cleanView() {
 
-    document.querySelector(`.gallery`).innerHTML = ``;
+    document.querySelector(`.gallery`).innerHTML = ``; 
+    
   };
+
+
+
+
+
