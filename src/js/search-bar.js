@@ -17,8 +17,6 @@ console.log(searchFormRef);
 
 function onFormSubmit(e) {
   e.preventDefault();
-
-  const genreName = localStorage.getItem(FUND_NAME);
  
   apiService.query = e.currentTarget.elements.searchQuery.value;  
    
