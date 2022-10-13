@@ -46,10 +46,20 @@ function fetchGallery(params) {
           });
           element.genre_ids = newArr;
           renderModal(element);
+          // костыли!!! Но попробую сделать по человечески.
+          let isWatched = getInfo('watched') || [];
+          let alreadyWatched = isWatched.find(movie => movie.id === element.id);
           let watched = document.querySelector('#watched');
-          let queued = document.querySelector('#queue');
-          // тут немного по ебанутому сделал, но так работает
+          if (alreadyWatched) {
+            watched.textContent = 'Remove from watched';
+          }
 
+          let isQueued = getInfo('queue') || [];
+          let alreadyQueued = isQueued.find(movie => movie.id === element.id);
+          let queued = document.querySelector('#queue');
+          if (alreadyQueued) {
+            queued.textContent = 'Remove from queued';
+          }
           watched.addEventListener('click', () => {
             let watchedMovies = getInfo('watched') || [];
             // console.log('from storage:', watchedMovies);            
@@ -60,11 +70,13 @@ function fetchGallery(params) {
             // console.log({ isAlreadyThere });
             if (isAlreadyThere) {
               // console.log('removing from watched');
+              watched.textContent = 'Add to watched';
               watchedMovies = watchedMovies.filter(
                 movie => movie.id !== element.id
               );
               watched.textContent = "Add to Watched";
             } else {
+              watched.textContent = 'Remove from watched';
               // console.log('adding movie to watched');
               watchedMovies.push(element);
               watched.textContent = "Remove from Watched";
@@ -91,11 +103,13 @@ function fetchGallery(params) {
               movie => movie.id === element.id
             );
             if (isAlreadyQueued) {
+              queued.textContent = 'Add to queue';
               queuedMovies = queuedMovies.filter(
                 movie => movie.id !== element.id
               );
                queued.textContent = "Add to Queue";
             } else {
+              queued.textContent = 'Remove to queue';
               queuedMovies.push(element);
               queued.textContent = "Remove from Queue";
             }
