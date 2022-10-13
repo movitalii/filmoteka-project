@@ -11,10 +11,8 @@ const refs = {
   renderModal: document.querySelector('.gallery'),
 };
 
-
 const apiService = new ApiService();
 refs.renderModal.addEventListener('click', showCard);
-
 
 function showCard(e) {
   e.preventDefault();
@@ -51,55 +49,43 @@ function fetchGallery(params) {
           let watched = document.querySelector('#watched');
           let queued = document.querySelector('#queue');
           // тут немного по ебанутому сделал, но так работает
-          watched.addEventListener('click', e => {
-            let lsArray = getInfo('watched');
-            if (lsArray) {
-              lsArray.push(element);
-              saveInfo('watched', lsArray);
+          watched.addEventListener('click', () => {
+            let watchedMovies = getInfo('watched') || [];
+            // console.log('from storage:', watchedMovies);
+            const isAlreadyThere = watchedMovies.find(
+              movie => movie.id === element.id
+            );
+            // console.log({ isAlreadyThere });
+            if (isAlreadyThere) {
+              // console.log('removing from watched');
+              watchedMovies = watchedMovies.filter(
+                movie => movie.id !== element.id
+              );
             } else {
-              saveInfo('watched', [element]);
+              // console.log('adding movie to watched');
+              watchedMovies.push(element);
             }
-            console.log('watched pressed');
+            saveInfo('watched', watchedMovies);
           });
-          // и тут немного костыльно
-          queued.addEventListener('click', e => {
-            let qArray = getInfo('queue');
-            if (qArray) {
-              qArray.push(element);
-              saveInfo('queue', qArray);
+
+          queued.addEventListener('click', () => {
+            let queuedMovies = getInfo('queue') || [];
+            const isAlreadyQueued = queuedMovies.find(
+              movie => movie.id === element.id
+            );
+            if (isAlreadyQueued) {
+              queuedMovies = queuedMovies.filter(
+                movie => movie.id !== element.id
+              );
             } else {
-              saveInfo('queue', [element]);
+              queuedMovies.push(element);
             }
-            console.log('queue pressed');
+            saveInfo('queue', queuedMovies);
           });
         }
       });
     });
 }
-// watched.addEventListener('click', addToWatched(element));
-// queued.addEventListener("click", addToQueue(element));
-
-// function addToWatched(element) {
-//   let lsArray = getInfo('watched');
-//   if (lsArray) {
-//     lsArray.push(element);
-//     saveInfo('watched', lsArray);
-//   } else {
-//     saveInfo('watched', [element]);
-//   }
-//   console.log("watched pressed")
-// }
-
-// function addToQueue(element) {
-//   let qArray = getInfo('queue');
-//   if (qArray) {
-//     qArray.push(element);
-//     saveInfo('queue', qArray);
-//   } else {
-//     saveInfo('queue', [element]);
-//   }
-//   console.log("queue pressed")
-// }
 
 // не трогать! это костыль на случай, если локал сторедж не отработает
 replacementGenres = [
