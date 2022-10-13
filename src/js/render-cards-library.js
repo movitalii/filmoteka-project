@@ -70,5 +70,5 @@ function addArticleImage(data) {
     return result;
   } ).map(result => onCard(result)).join('');
     // console.log('cart', cart)
-  document.querySelector(`.library`).insertAdjacentHTML('beforeend', cart);
+  // document.querySelector(`.library`).insertAdjacentHTML('beforeend', cart);
 }
