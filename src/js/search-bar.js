@@ -19,12 +19,9 @@ function onFormSubmit(e) {
   e.preventDefault();
 
   const genreName = localStorage.getItem(FUND_NAME);
-  
- genres = JSON.parse(genreName);  
  
   apiService.query = e.currentTarget.elements.searchQuery.value;  
-
-    
+   
       
 
     apiService.fetchFundFilms().then(data => {
@@ -46,10 +43,10 @@ function onFormSubmit(e) {
   
 });
  
- console.log(cartError)
+//  console.log(cartError)
     return;
    }
-      console.log('ok', data.results.length);
+      // console.log('ok', data.results.length);
       cleanView()
     addArticleImage(data); 
    });
