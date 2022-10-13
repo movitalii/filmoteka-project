@@ -2,47 +2,45 @@
 // по нажатию кнопки QUEUE в значение keyOfLocalStorage вносим ключ локал сторадж очереди и добавляем/убираем класс .is-active
 // по нажатию на карточку открываем модальное окно
 
-
-
-import axios from "axios";
-import ApiService from "./api-service";
-import onCard from './card';
+import axios from 'axios';
+import ApiService from './api-service';
+import onCardLib from './card_library';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
+const apiService = new ApiService();
+
 
 const keyOfLocalStorage = 1;
 const stringKey = keyOfLocalStorage.toString();
-// вместо единицы должен приходить ключ из локального хранилища 
+console.log(apiService);
+// вместо единицы должен приходить ключ из локального хранилища
 
-
-let arrayToRender = [];
-arrayToRender = getInfo(stringKey);
 // console.log(arrayToRender);
 
 
-// --------
-const apiService = new ApiService();
-const GENRE_NAME   = 'genre_card';
 
-apiService.fetchGenres().then(data => {
-  const genres = data.genres
-  localStorage.setItem(GENRE_NAME, JSON.stringify(genres))
-//  console.log('ok', data.genres);
-});
-
-apiService.fetchImage().then(data => {
-  saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
-  addArticleImage(data);
-});
+let arrayToRender = [];
+// функція викликається при кліку, звертається до локал стораж, забирає масив ID і по ньому рендерить в розмітку
+function makeArrayToRender(arg) {
+  arrayToRender = getInfo(arg);
+  console.log(arrayToRender);
+  addArticleImage(arrayToRender);
+  
+  // const filmIdArray = arrayToRender.map(film => film.id);
+  // console.log(filmIdArray);
+  // filmIdArray.forEach(el => getFilmById(el));
+}
+const GENRE_NAME = 'genre_card';
 const genreName = localStorage.getItem(GENRE_NAME);
   // console.log('genre', genreName)
-  const genres = JSON.parse(genreName);  
+ const genres = JSON.parse(genreName);  
+console.log(genres);
 
-function addArticleImage(data) {
+function addArticleImage(arrayToRender) {
   
-  // console.log(data.results);
-  const cart = data.results.map(result => {
+  // console.log('image', data);
+  const cart = arrayToRender.map(arrayToRender => {
     let genresArr = [];
-    result.genre_ids.forEach(genreID => {
+    arrayToRender.genre_ids.forEach(genreID => {
       // console.log(genreID)
       genres.forEach(genOBJ => {
         // console.log(genOBJ)
@@ -62,13 +60,61 @@ function addArticleImage(data) {
       
       genresArr.push('No genres');
     }
-    result.genre_ids = genresArr;
+    arrayToRender.genre_ids = genresArr;
     // console.log(result)
     // console.log('odject', Object.values(result.genre_ids)) 
     
     
-    return result;
-  } ).map(result => onCard(result)).join('');
+    return arrayToRender;
+  } ).map(arrayToRender => onCardLib(arrayToRender)).join('');
     // console.log('cart', cart)
-  document.querySelector(`.library`).insertAdjacentHTML('beforeend', cart);
+  refs.libraryEl.insertAdjacentHTML('beforeend', cart);
 }
+
+function getFilmById(filmId) {
+  apiService.id = filmId;
+}
+
+
+
+// const filmDataObj = getFilmById(14410);
+// console.log("filmDataObj",filmDataObj);
+// const cartMarkup = onCard(filmDataObj).join('');
+// console.log("MARKUP", cartMarkup);
+// console.log('cart', cart)
+// refs.libraryEl.insertAdjacentHTML('beforeend', cartMarkup);
+
+
+
+
+// makeArrayToRender('queue');
+// makeArrayToRender('watched');
+
+// --------
+const refs = {
+  queueBtn: document.querySelector('#queue'),
+  watchedBtn: document.querySelector('#watched'),
+  libraryEl: document.querySelector('.library'),
+};
+
+console.log(refs.queueBtn);
+console.log(refs.watchedBtn);
+console.log(refs.libraryEl);
+
+const onClickWatched = () => {
+  refs.queueBtn.classList.remove('btn_is-active');
+  refs.watchedBtn.classList.add('btn_is-active');
+  makeArrayToRender('watched');
+};
+
+const onClickQueue = () => {
+  refs.queueBtn.classList.add('btn_is-active');
+  refs.watchedBtn.classList.remove('btn_is-active');
+  makeArrayToRender('queue');
+};
+
+if (refs.queueBtn) {
+  refs.queueBtn.addEventListener('click', onClickQueue);
+  refs.watchedBtn.addEventListener('click', onClickWatched);
+}
+

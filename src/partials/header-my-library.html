@@ -26,19 +26,39 @@
 
     <!-- Button-box-->
     <div class="btn-container">
-      <button class="library-button btn_is-active" type="button">
+      <button class="library-button" id="watched" type="button">
         <span class="label">watched</span>
       </button>
 
-      <button class="library-button" type="button">
+      <button class="library-button" id="queue" type="button">
         <span class="label">queue</span>
       </button>
-    </div>
 
-    <!-- User-theme-->
-    <div class="page-action">
-      <button type="button" class="page-action__theme"></button>
-      <!-- <button type="button" class="page__reset"></button> -->
+      <!-- User-theme-->
+      <div class="page-action">
+        <button type="button" class="page-action__theme"></button>
+      </div>
     </div>
   </div>
 </header>
+
+<!-- Plug-empty-->
+<section class="content">
+  <div class="container content-library__card">
+    <div class="content-library__img-card">
+      <img
+        src="https://i.imgur.com/iLiA7oC.png"
+        loading="lazy"
+        alt="mike"
+        class="content-library__image"
+      />
+    </div>
+    <div class="content-library__list">
+      <h2 class="content-library__title">Ouhh... it's empty in here!</h2>
+      <p class="content-library__text">
+        <a class="content-library__link" href="./index.html">Go back</a>
+        and add your favorite movies.
+      </p>
+    </div>
+  </div>
+</section>

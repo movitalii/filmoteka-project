@@ -11,10 +11,8 @@ const refs = {
   renderModal: document.querySelector('.gallery'),
 };
 
-
 const apiService = new ApiService();
 refs.renderModal.addEventListener('click', showCard);
-
 
 function showCard(e) {
   e.preventDefault();
@@ -42,141 +40,173 @@ function fetchGallery(params) {
           element.genre_ids.forEach(id => {
             genres.find(el => {
               if (el.id == id) {
-                newArr.push(el.name);
+                newArr.push(` ${el.name}`);
               }
             });
           });
           element.genre_ids = newArr;
           renderModal(element);
+          // костыли!!! Но попробую сделать по человечески.
+          let isWatched = getInfo('watched') || [];
+          let alreadyWatched = isWatched.find(movie => movie.id === element.id);
           let watched = document.querySelector('#watched');
+          if (alreadyWatched) {
+            watched.textContent = 'Remove from watched';
+          }
+
+          let isQueued = getInfo('queue') || [];
+          let alreadyQueued = isQueued.find(movie => movie.id === element.id);
           let queued = document.querySelector('#queue');
-          // тут немного по ебанутому сделал, но так работает
-          watched.addEventListener('click', e => {
-            let lsArray = getInfo('watched');
-            if (lsArray) {
-              lsArray.push(element);
-              saveInfo('watched', lsArray);
+          if (alreadyQueued) {
+            queued.textContent = 'Remove from queued';
+          }
+          watched.addEventListener('click', () => {
+            let watchedMovies = getInfo('watched') || [];
+            // console.log('from storage:', watchedMovies);
+
+            const isAlreadyThere = watchedMovies.find(
+              movie => movie.id === element.id
+            );
+            // console.log({ isAlreadyThere });
+            if (isAlreadyThere) {
+              // console.log('removing from watched');
+              watched.textContent = 'Add to watched';
+              watchedMovies = watchedMovies.filter(
+                movie => movie.id !== element.id
+              );
+              watched.textContent = 'Add to Watched';
             } else {
-              saveInfo('watched', [element]);
+              watched.textContent = 'Remove from watched';
+              // console.log('adding movie to watched');
+              watchedMovies.push(element);
+              watched.textContent = 'Remove from Watched';
             }
-            console.log('watched pressed');
+            saveInfo('watched', watchedMovies);
           });
-          // и тут немного костыльно
-          queued.addEventListener('click', e => {
-            let qArray = getInfo('queue');
-            if (qArray) {
-              qArray.push(element);
-              saveInfo('queue', qArray);
+
+          let watchedMovies = getInfo('watched') || [];
+
+          const isAlreadyThere = watchedMovies.find(
+            movie => movie.id === element.id
+          );
+
+          if (isAlreadyThere) {
+            watched.textContent = 'Remove from Watched';
+          } else {
+            watched.textContent = 'Add to Watched';
+          }
+
+          queued.addEventListener('click', () => {
+            let queuedMovies = getInfo('queue') || [];
+            const isAlreadyQueued = queuedMovies.find(
+              movie => movie.id === element.id
+            );
+            if (isAlreadyQueued) {
+              queued.textContent = 'Add to queue';
+              queuedMovies = queuedMovies.filter(
+                movie => movie.id !== element.id
+              );
+              queued.textContent = 'Add to Queue';
             } else {
-              saveInfo('queue', [element]);
+              queued.textContent = 'Remove to queue';
+              queuedMovies.push(element);
+              queued.textContent = 'Remove from Queue';
             }
-            console.log('queue pressed');
+            saveInfo('queue', queuedMovies);
           });
+
+          let queuedMovies = getInfo('queue') || [];
+
+          const isAlreadyQueued = queuedMovies.find(
+            movie => movie.id === element.id
+          );
+
+          if (isAlreadyQueued) {
+            queued.textContent = 'Remove from Queue';
+          } else {
+            queued.textContent = 'Add to Queue';
+          }
         }
       });
     });
 }
-// watched.addEventListener('click', addToWatched(element));
-// queued.addEventListener("click", addToQueue(element));
-
-// function addToWatched(element) {
-//   let lsArray = getInfo('watched');
-//   if (lsArray) {
-//     lsArray.push(element);
-//     saveInfo('watched', lsArray);
-//   } else {
-//     saveInfo('watched', [element]);
-//   }
-//   console.log("watched pressed")
-// }
-
-// function addToQueue(element) {
-//   let qArray = getInfo('queue');
-//   if (qArray) {
-//     qArray.push(element);
-//     saveInfo('queue', qArray);
-//   } else {
-//     saveInfo('queue', [element]);
-//   }
-//   console.log("queue pressed")
-// }
 
 // не трогать! это костыль на случай, если локал сторедж не отработает
-replacementGenres = [
-  {
-    id: 28,
-    name: 'Action',
-  },
-  {
-    id: 12,
-    name: 'Adventure',
-  },
-  {
-    id: 16,
-    name: 'Animation',
-  },
-  {
-    id: 35,
-    name: 'Comedy',
-  },
-  {
-    id: 80,
-    name: 'Crime',
-  },
-  {
-    id: 99,
-    name: 'Documentary',
-  },
-  {
-    id: 18,
-    name: 'Drama',
-  },
-  {
-    id: 10751,
-    name: 'Family',
-  },
-  {
-    id: 14,
-    name: 'Fantasy',
-  },
-  {
-    id: 36,
-    name: 'History',
-  },
-  {
-    id: 27,
-    name: 'Horror',
-  },
-  {
-    id: 10402,
-    name: 'Music',
-  },
-  {
-    id: 9648,
-    name: 'Mystery',
-  },
-  {
-    id: 10749,
-    name: 'Romance',
-  },
-  {
-    id: 878,
-    name: 'Science Fiction',
-  },
-  {
-    id: 10770,
-    name: 'TV Movie',
-  },
-  {
-    id: 53,
-    name: 'Thriller',
-  },
-  {
-    id: 10752,
-    name: 'War',
-  },
-  {
-    id: 37,
-    name: 'Western',
-  },
-];
+// replacementGenres = [
+//   {
+//     id: 28,
+//     name: 'Action',
+//   },
+//   {
+//     id: 12,
+//     name: 'Adventure',
+//   },
+//   {
+//     id: 16,
+//     name: 'Animation',
+//   },
+//   {
+//     id: 35,
+//     name: 'Comedy',
+//   },
+//   {
+//     id: 80,
+//     name: 'Crime',
+//   },
+//   {
+//     id: 99,
+//     name: 'Documentary',
+//   },
+//   {
+//     id: 18,
+//     name: 'Drama',
+//   },
+//   {
+//     id: 10751,
+//     name: 'Family',
+//   },
+//   {
+//     id: 14,
+//     name: 'Fantasy',
+//   },
+//   {
+//     id: 36,
+//     name: 'History',
+//   },
+//   {
+//     id: 27,
+//     name: 'Horror',
+//   },
+//   {
+//     id: 10402,
+//     name: 'Music',
+//   },
+//   {
+//     id: 9648,
+//     name: 'Mystery',
+//   },
+//   {
+//     id: 10749,
+//     name: 'Romance',
+//   },
+//   {
+//     id: 878,
+//     name: 'Science Fiction',
+//   },
+//   {
+//     id: 10770,
+//     name: 'TV Movie',
+//   },
+//   {
+//     id: 53,
+//     name: 'Thriller',
+//   },
+//   {
+//     id: 10752,
+//     name: 'War',
+//   },
+//   {
+//     id: 37,
+//     name: 'Western',
+//   },
+// ];

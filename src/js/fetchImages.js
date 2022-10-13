@@ -4,29 +4,28 @@ import onCard from './card';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
 /////////////
 const apiService = new ApiService();
+
 const GENRE_NAME = 'genre_card';
 
 let genres = []
 apiService.fetchGenres().then(data => {
    genres = data.genres
    localStorage.setItem(GENRE_NAME, JSON.stringify(genres))
-
+   apiService.fetchImage().then(data => {
+  
+    addArticleImage(data); 
+    saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
+   
+  });
 //  console.log('ok', data.genres);
 });
 localStorage.setItem(GENRE_NAME, JSON.stringify(genres))
 const genreName = localStorage.getItem(GENRE_NAME);
   // console.log('genre', genreName)
-  genres = JSON.parse(genreName);  
+ genres = JSON.parse(genreName);  
+console.log(genres)
 
-
-apiService.fetchImage().then(data => {
-  
-  addArticleImage(data); 
-  saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
- 
-});
-
-function addArticleImage(data) {
+export default function addArticleImage(data) {
   
   // console.log('image', data);
   const cart = data.results.map(result => {
@@ -61,3 +60,4 @@ function addArticleImage(data) {
     // console.log('cart', cart)
   document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart);
 }
+

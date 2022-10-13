@@ -11,6 +11,7 @@ export function renderModal({
   genre_ids,
   overview,
   name,
+  original_name,
 }) {
   const markup = `<div class="modal">
                         <button type="button" class="modal__btn-close" data-modal-close>
@@ -21,12 +22,14 @@ export function renderModal({
 
                         <img class="modal__image" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="${title} poster">
 
-                        <h2 class="modal__title">${title}</h2>
+                        <h2 class="modal__title">${
+                          name || original_title || original_name
+                        }</h2>
 
                         <p class="modal__info">Vote / Votes <span class="modal__info-value-vote">${vote_average}</span> / <span class="modal__info-value">${vote_count}</span></p>
                         <p class="modal__info">Popularity <span class="modal__info-value">${popularity}</span></p>
                         <p class="modal__info">Original Title <span class="modal__info-value">${
-                          original_title || name
+                          name || original_title || original_name
                         }</span></p>
                         <p class="modal__info">Genre <span class="modal__info-value">${genre_ids}</span></p>
 
@@ -34,8 +37,8 @@ export function renderModal({
                         <p class="modal__about-text">${overview}</p>
 
                         <div class="modal__btn-container">
-                        <button id="watched" type="button" class="modal__btn modal__btn-watched">Add to watched</button>
-                        <button id="queue" type="button" class="modal__btn modal__btn-queue">Add to queue</button>
+                        <button id="watched" type="button" class="modal__btn modal__btn-watched"></button>
+                        <button id="queue" type="button" class="modal__btn modal__btn-queue"></button>
                         </div>
                     </div>`;
   backdrop.innerHTML = markup;
