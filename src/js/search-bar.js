@@ -66,8 +66,8 @@ function onFormSubmit(e) {
         genresArr.push('No genres');
       }
       result.genre_ids = genresArr;
-      
       return result;
+      
     } ).map(result => onCard(result)).join('');
       // console.log('cart', cart)
     document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart);

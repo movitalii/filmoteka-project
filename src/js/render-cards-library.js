@@ -22,8 +22,26 @@ function makeArrayToRender(arg) {
   console.log(arrayToRender);
   const filmIdNumber = arrayToRender.map(film => film.id);
   console.log(filmIdNumber);
-  filmIdNumber.forEach(el => console.log(el));
+  filmIdNumber.forEach(el => getFilmById(el));
 }
+
+function getFilmById(filmId) {
+  apiService.id = filmId;
+  apiService.fetchAllFilms().then(data => onMovesCard(data));
+
+}
+
+
+
+// const filmDataObj = getFilmById(14410);
+// console.log("filmDataObj",filmDataObj);
+// const cartMarkup = onCard(filmDataObj).join('');
+// console.log("MARKUP", cartMarkup);
+// console.log('cart', cart)
+// refs.libraryEl.insertAdjacentHTML('beforeend', cartMarkup);
+
+
+
 
 // makeArrayToRender('queue');
 // makeArrayToRender('watched');
@@ -32,10 +50,12 @@ function makeArrayToRender(arg) {
 const refs = {
   queueBtn: document.querySelector('#queue'),
   watchedBtn: document.querySelector('#watched'),
+  libraryEl: document.querySelector('.library'),
 };
 
 console.log(refs.queueBtn);
 console.log(refs.watchedBtn);
+console.log(refs.libraryEl);
 
 const onClickWatched = () => {
   refs.queueBtn.classList.remove('btn_is-active');
