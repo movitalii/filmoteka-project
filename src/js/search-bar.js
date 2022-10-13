@@ -22,17 +22,17 @@ function onFormSubmit(e) {
   
  genres = JSON.parse(genreName);  
  
-  apiService.query = e.currentTarget.elements.searchQuery.value;
-  cleanView()
- 
-    apiService.fetchFundFilms();
+  apiService.query = e.currentTarget.elements.searchQuery.value;  
+
+    
+      
 
     apiService.fetchFundFilms().then(data => {
         
    if(data.results.length === 0){
-    input.value = '';
-   
- document.querySelector('.error-notification').insertAdjacentHTML('beforeend', 'Search result not successful. Enter the correct movie name and');
+    // input.value = '';
+       
+ document.querySelector('.error-notification').insertAdjacentHTML('beforeend', 'Search result not successful. Enter the correct movie name.');
     
  apiService.fetchImage().then(data => {
 
@@ -49,7 +49,8 @@ function onFormSubmit(e) {
  console.log(cartError)
     return;
    }
-    console.log('ok', data.results.length);
+      console.log('ok', data.results.length);
+      cleanView()
     addArticleImage(data); 
    });
   
