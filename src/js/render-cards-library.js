@@ -32,7 +32,7 @@ function makeArrayToRender(arg) {
 const GENRE_NAME = 'genre_card';
 const genreName = localStorage.getItem(GENRE_NAME);
   // console.log('genre', genreName)
- genres = JSON.parse(genreName);  
+ const genres = JSON.parse(genreName);  
 console.log(genres);
 
 function addArticleImage(arrayToRender) {
