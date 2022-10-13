@@ -49,9 +49,11 @@ function fetchGallery(params) {
           let watched = document.querySelector('#watched');
           let queued = document.querySelector('#queue');
           // тут немного по ебанутому сделал, но так работает
+
           watched.addEventListener('click', () => {
             let watchedMovies = getInfo('watched') || [];
-            // console.log('from storage:', watchedMovies);
+            // console.log('from storage:', watchedMovies);            
+
             const isAlreadyThere = watchedMovies.find(
               movie => movie.id === element.id
             );
@@ -61,12 +63,27 @@ function fetchGallery(params) {
               watchedMovies = watchedMovies.filter(
                 movie => movie.id !== element.id
               );
+              watched.textContent = "Add to Watched";
             } else {
               // console.log('adding movie to watched');
               watchedMovies.push(element);
+              watched.textContent = "Remove from Watched";
             }
             saveInfo('watched', watchedMovies);
           });
+
+          let watchedMovies = getInfo('watched') || [];  
+          
+          const isAlreadyThere = watchedMovies.find(
+              movie => movie.id === element.id
+          );
+
+          if (isAlreadyThere) {
+              watched.textContent = "Remove from Watched";
+            } else {
+              watched.textContent = "Add to Watched";
+            }      
+
 
           queued.addEventListener('click', () => {
             let queuedMovies = getInfo('queue') || [];
@@ -77,11 +94,25 @@ function fetchGallery(params) {
               queuedMovies = queuedMovies.filter(
                 movie => movie.id !== element.id
               );
+               queued.textContent = "Add to Queue";
             } else {
               queuedMovies.push(element);
+              queued.textContent = "Remove from Queue";
             }
             saveInfo('queue', queuedMovies);
           });
+
+          let queuedMovies = getInfo('queue') || [];
+
+          const isAlreadyQueued = queuedMovies.find(
+              movie => movie.id === element.id
+          );
+          
+          if (isAlreadyQueued) {
+            queued.textContent = "Remove from Queue";
+          } else {
+            queued.textContent = "Add to Queue";
+          }
         }
       });
     });

@@ -34,8 +34,8 @@ export function renderModal({
                         <p class="modal__about-text">${overview}</p>
 
                         <div class="modal__btn-container">
-                        <button id="watched" type="button" class="modal__btn modal__btn-watched">Add to watched</button>
-                        <button id="queue" type="button" class="modal__btn modal__btn-queue">Add to queue</button>
+                        <button id="watched" type="button" class="modal__btn modal__btn-watched"></button>
+                        <button id="queue" type="button" class="modal__btn modal__btn-queue"></button>
                         </div>
                     </div>`;
   backdrop.innerHTML = markup;
