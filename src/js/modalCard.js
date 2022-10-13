@@ -1,5 +1,5 @@
 import ApiService from './api-service';
-import { renderModal, backdrop } from './renderModal';
+import { renderModal, backdrop } from './templates/renderModal';
 
 const cardGallery = document.querySelector('.gallery');
 import fetchImages from './fetchImages';
