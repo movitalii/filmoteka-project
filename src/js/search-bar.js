@@ -1,7 +1,7 @@
 
 import ApiService from './api-service';
-import onCard from './card';
-import renderFilmsMarkup from './templates/renderFilmsMarkup';
+import addArticleImage from './fetchImages';
+import { saveInfo, getInfo, removeInfo } from './storage_api';
 
 const FUND_NAME = 'genre_card';
 
@@ -17,31 +17,39 @@ console.log(searchFormRef);
 
 function onFormSubmit(e) {
   e.preventDefault();
-
-  const genreName = localStorage.getItem(FUND_NAME);
-  console.log('genre', genreName)
-  genres = JSON.parse(genreName);  
  
-  apiService.query = e.currentTarget.elements.searchQuery.value;
-  cleanView()
-  
-  console.log(e.currentTarget.value);
-  
-    apiService.fetchFundFilms();
+  apiService.query = e.currentTarget.elements.searchQuery.value;  
+   
+      
 
     apiService.fetchFundFilms().then(data => {
-      moves = data;    
-   
-    console.log('ok', data);
-    onMovesCard(data);
-   });
-   input.value = '';
-   
-  }
+        
+   if(data.results.length === 0){
+    // input.value = '';
+       
+ document.querySelector('.error-notification').insertAdjacentHTML('beforeend', 'Search result not successful. Enter the correct movie name.');
+    
+ apiService.fetchImage().then(data => {
 
+  setTimeout(() => {
+    if(document.querySelector(`.error-notification`)) {
+      document.querySelector('.error-notification').innerHTML = '';
+      addArticleImage(data); 
+  saveInfo(data.page, data.results); 
+    }
+  }, 2000);
   
-  function onMovesCard(data) {
+});
+ 
+//  console.log(cartError)
+    return;
+   }
+      // console.log('ok', data.results.length);
+      cleanView()
+    addArticleImage(data); 
+   });
   
+<<<<<<< HEAD
     // console.log('image', data);
     const cart = data.results.map(result => {
       let genresArr = [];
@@ -71,9 +79,17 @@ function onFormSubmit(e) {
     } ).map(result => onCard(result)).join('');
       // console.log('cart', cart)
     document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart);
+=======
+>>>>>>> main
   }
 
   function cleanView() {
 
-    document.querySelector(`.gallery`).innerHTML = ``;
+    document.querySelector(`.gallery`).innerHTML = ``; 
+    
   };
+
+
+
+
+
