@@ -1,45 +1,67 @@
-import { movieSearchByName } from './service_api';
 
-import renderFilmsMarkup from './templates/renderFilmsMarkup';
+import ApiService from './api-service';
+import addArticleImage from './fetchImages';
+import { saveInfo, getInfo, removeInfo } from './storage_api';
 
-const searchFormRef = document.querySelector('.form-group');
-const galleryRef = document.querySelector('.gallery');
-const paginationRef = document.querySelector('#pagination');
+const FUND_NAME = 'genre_card';
+
+const searchFormRef = document.querySelector('#form-search');
 const errorMessage = document.querySelector('.error-notification');
-const filmsApi = new movieSearchByName();
+const input = document.querySelector(`.form-group__input`)
 
-searchFormRef.addEventListener('submit', onFormSubmit);
+const apiService = new ApiService();
 
-async function onFormSubmit(evt) {
-  evt.preventDefault();
+searchFormRef.addEventListener('submit', onFormSubmit) ;
 
-  try {
-    filmsApi.searchQuery = evt.currentTarget.elements.searchQuery.value.trim();
-    if (filmsApi.searchQuery === '') return;
+console.log(searchFormRef);
 
-    const films = await filmsApi.fetchMoviesByKeyword();
-    if (films.length === 0) {
-      addErrorStyles();
-      errorMessage.style.display = 'block';
-    } else {
-      resetErrorStyles();
+function onFormSubmit(e) {
+  e.preventDefault();
+
+  const genreName = localStorage.getItem(FUND_NAME);
+  
+ genres = JSON.parse(genreName);  
+ 
+  apiService.query = e.currentTarget.elements.searchQuery.value;
+  cleanView()
+ 
+    apiService.fetchFundFilms();
+
+    apiService.fetchFundFilms().then(data => {
+        
+   if(data.results.length === 0){
+    input.value = '';
+   
+ document.querySelector('.error-notification').insertAdjacentHTML('beforeend', 'Search result not successful. Enter the correct movie name and');
+    
+ apiService.fetchImage().then(data => {
+
+  setTimeout(() => {
+    if(document.querySelector(`.error-notification`)) {
+      document.querySelector('.error-notification').innerHTML = '';
+      addArticleImage(data); 
+  saveInfo(data.page, data.results); 
     }
-    renderFilmsMarkup(films);
-
-    searchFormRef.reset();
-  } catch (error) {
-    console.log(error);
+  }, 2000);
+  
+});
+ 
+ console.log(cartError)
+    return;
+   }
+    console.log('ok', data.results.length);
+    addArticleImage(data); 
+   });
+  
   }
-}
 
-export function resetErrorStyles() {
-  galleryRef.classList.remove('wrong');
-  paginationRef.style.display = 'flex';
-  errorMessage.style.display = 'none';
-}
+  function cleanView() {
 
-export function addErrorStyles() {
-  galleryRef.classList.add('wrong');
-  paginationRef.style.display = 'none';
-  errorMessage.style.display = 'block';
-}
+    document.querySelector(`.gallery`).innerHTML = ``; 
+    
+  };
+
+
+
+
+
