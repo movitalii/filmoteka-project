@@ -46,7 +46,8 @@ html.light .page-action__theme {
 html.dark .card_name,
 html.dark .modal__info-value,
 html.dark .content-library__title,
-html.dark .content-library__text {
+html.dark .content-library__text,
+html.dark .team-name {
   color: $secondaryColor;
 }
 
@@ -69,6 +70,15 @@ html.dark .modal__btn-close {
 }
 html.light .modal__btn-close {
   stroke: $mainColor;
+}
+
+html.dark footer,
+html.dark .team-wrapper {
+  background-color: #212124;
+}
+
+html.dark .team-role {
+  color: #ba7446;
 }
 
 @keyframes spin {
