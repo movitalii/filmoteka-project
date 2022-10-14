@@ -12,7 +12,8 @@ const refs = {
 };
 
 const apiService = new ApiService();
-refs.renderModal.addEventListener('click', showCard);
+if(refs.renderModal) {
+refs.renderModal.addEventListener('click', showCard)};
 
 window.addEventListener('keydown', closeModalHandler);
 
