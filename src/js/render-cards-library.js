@@ -68,7 +68,7 @@ watchedData = getInfo('watched');
 // if (queueData.length < 1 || watchedData < 1) {return};
 
 if (refs.queueBtn) {
-  if (!queueData) {
+  if (!queueData && !watchedData) {
     return;
   } else if (!watchedData) {
     return;
