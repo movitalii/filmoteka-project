@@ -8,7 +8,13 @@ import onCardLib from './card_library';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
 const apiService = new ApiService();
 
-//localStorageChecker
+
+const keyOfLocalStorage = 1;
+const stringKey = keyOfLocalStorage.toString();
+console.log(apiService);
+// вместо единицы должен приходить ключ из локального хранилища
+
+// console.log(arrayToRender);
 
 
 
@@ -18,12 +24,16 @@ function makeArrayToRender(arg) {
   arrayToRender = getInfo(arg);
   console.log(arrayToRender);
   addArticleImage(arrayToRender);
-
 }
 
 function cleanView() {
   refs.libraryEl.innerHTML = ``;
 }
+const GENRE_NAME = 'genre_card';
+const genreName = localStorage.getItem(GENRE_NAME);
+  // console.log('genre', genreName)
+ genres = JSON.parse(genreName);  
+console.log(genres);
 
 function addArticleImage(arrayToRender) {
   const card = arrayToRender
@@ -70,12 +80,19 @@ watchedData = getInfo('watched');
 // console.log(watchedData.length);
 // if (queueData.length < 1 || watchedData < 1) {return};
 
-if(refs.queueBtn){
-  if (!queueData) {return} 
-  else if (!watchedData) {return} 
-  else if ( watchedData.length > 0) {onClickWatched()}
-else if (queueData.length > 0 ) {onClickQueue()}  
-else {return};}
+if (refs.queueBtn) {
+  if (!queueData) {
+    return;
+  } else if (!watchedData) {
+    return;
+  } else if (watchedData.length > 0) {
+    onClickWatched();
+  } else if (queueData.length > 0) {
+    onClickQueue();
+  } else {
+    return;
+  }
+}
 
 // let watchedData = getInfo('watched');
 // console.log("LENGTH", localData.length);

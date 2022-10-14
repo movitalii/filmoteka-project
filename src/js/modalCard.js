@@ -40,19 +40,29 @@ function fetchGallery(params) {
           element.genre_ids.forEach(id => {
             genres.find(el => {
               if (el.id == id) {
-                newArr.push(el.name);
+                newArr.push(` ${el.name}`);
               }
             });
           });
           element.genre_ids = newArr;
           renderModal(element);
+          // костыли!!! Но попробую сделать по человечески.
+          let isWatched = getInfo('watched') || [];
+          let alreadyWatched = isWatched.find(movie => movie.id === element.id);
           let watched = document.querySelector('#watched');
-          let queued = document.querySelector('#queue');
-          // тут немного по ебанутому сделал, но так работает
+          if (alreadyWatched) {
+            watched.textContent = 'Remove from watched';
+          }
 
+          let isQueued = getInfo('queue') || [];
+          let alreadyQueued = isQueued.find(movie => movie.id === element.id);
+          let queued = document.querySelector('#queue');
+          if (alreadyQueued) {
+            queued.textContent = 'Remove from queued';
+          }
           watched.addEventListener('click', () => {
             let watchedMovies = getInfo('watched') || [];
-            // console.log('from storage:', watchedMovies);            
+            // console.log('from storage:', watchedMovies);
 
             const isAlreadyThere = watchedMovies.find(
               movie => movie.id === element.id
@@ -60,30 +70,31 @@ function fetchGallery(params) {
             // console.log({ isAlreadyThere });
             if (isAlreadyThere) {
               // console.log('removing from watched');
+              watched.textContent = 'Add to watched';
               watchedMovies = watchedMovies.filter(
                 movie => movie.id !== element.id
               );
-              watched.textContent = "Add to Watched";
+              watched.textContent = 'Add to Watched';
             } else {
+              watched.textContent = 'Remove from watched';
               // console.log('adding movie to watched');
               watchedMovies.push(element);
-              watched.textContent = "Remove from Watched";
+              watched.textContent = 'Remove from Watched';
             }
             saveInfo('watched', watchedMovies);
           });
 
-          let watchedMovies = getInfo('watched') || [];  
-          
+          let watchedMovies = getInfo('watched') || [];
+
           const isAlreadyThere = watchedMovies.find(
-              movie => movie.id === element.id
+            movie => movie.id === element.id
           );
 
           if (isAlreadyThere) {
-              watched.textContent = "Remove from Watched";
-            } else {
-              watched.textContent = "Add to Watched";
-            }      
-
+            watched.textContent = 'Remove from Watched';
+          } else {
+            watched.textContent = 'Add to Watched';
+          }
 
           queued.addEventListener('click', () => {
             let queuedMovies = getInfo('queue') || [];
@@ -91,13 +102,15 @@ function fetchGallery(params) {
               movie => movie.id === element.id
             );
             if (isAlreadyQueued) {
+              queued.textContent = 'Add to queue';
               queuedMovies = queuedMovies.filter(
                 movie => movie.id !== element.id
               );
-               queued.textContent = "Add to Queue";
+              queued.textContent = 'Add to Queue';
             } else {
+              queued.textContent = 'Remove to queue';
               queuedMovies.push(element);
-              queued.textContent = "Remove from Queue";
+              queued.textContent = 'Remove from Queue';
             }
             saveInfo('queue', queuedMovies);
           });
@@ -105,13 +118,13 @@ function fetchGallery(params) {
           let queuedMovies = getInfo('queue') || [];
 
           const isAlreadyQueued = queuedMovies.find(
-              movie => movie.id === element.id
+            movie => movie.id === element.id
           );
-          
+
           if (isAlreadyQueued) {
-            queued.textContent = "Remove from Queue";
+            queued.textContent = 'Remove from Queue';
           } else {
-            queued.textContent = "Add to Queue";
+            queued.textContent = 'Add to Queue';
           }
         }
       });
