@@ -13,7 +13,7 @@ export function renderModal({
   name,
   original_name, }) {
     const markup = `<div class="modal">
-                        <button type="button" class="modal__btn-close">
+                        <button type="button" class="modal__btn-close" data-modal-close>
                             <svg class="modal__icon-close" width="14" height="14">
                             <use href="${iconURL}#close-icon"></use>
                             </svg>
