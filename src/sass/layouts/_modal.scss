@@ -153,19 +153,20 @@
 
 .modal__info-value-vote {
   display: inline-block;
-    width: 36px;
-    height: 16px;
-    padding: 0 10px;  
-    
-    background-color: #FF6B01;
-    color: #000000;
-    background-color: #F7F7F7;
-    border-radius: 5px;
+  width: 36px;
+  height: 16px;
+
+
+  background-color: #FF6B01;
+  color: #000000;
+  background-color: #F7F7F7;
+  border-radius: 5px;
 }
 
 .modal__info-value-vote--accent {
   color: #ffffff;
   background-color: #ff6b08;
+  padding: 1px 10px 0px 10px;
 }
 
 .modal__info-value-title {
@@ -207,7 +208,9 @@
     border: 1px solid #000000;
 
     transform: scale(1);
-    transition: transform box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition:  box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
     
       @include mq(tablet) {
         width: 125px;
