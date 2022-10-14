@@ -1,7 +1,7 @@
 import ApiService from './api-service';
 import { renderModal, backdrop } from './renderModal';
 
-const cardGallery = document.querySelector('.gallery');
+const cardGallery = document.querySelector('.container-open-modal');
 import fetchImages from './fetchImages';
 import onCard from './card';
 import { getInfo, saveInfo } from './storage_api';
@@ -14,9 +14,17 @@ const refs = {
 const apiService = new ApiService();
 refs.renderModal.addEventListener('click', showCard);
 
+window.addEventListener('keydown', closeModalHandler);
+
+  function closeModalHandler(e) {
+    if (e.code === 'Escape') {
+      backdrop.classList.add('is-hidden');
+    }
+  }
+
 function showCard(e) {
   e.preventDefault();
-  backdrop.classList.toggle('is-hidden');
+  backdrop.classList.remove('is-hidden');
   fetchGallery(
     '/' +
       e.target.src.substring(
