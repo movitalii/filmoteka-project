@@ -8,15 +8,7 @@ import onCardLib from './card_library';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
 const apiService = new ApiService();
 
-
-const keyOfLocalStorage = 1;
-const stringKey = keyOfLocalStorage.toString();
-console.log(apiService);
-// вместо единицы должен приходить ключ из локального хранилища
-
-// console.log(arrayToRender);
-
-
+//localStorageChecker
 
 let arrayToRender = [];
 // функція викликається при кліку, звертається до локал стораж, забирає масив і по ньому рендерить в розмітку
@@ -29,11 +21,6 @@ function makeArrayToRender(arg) {
 function cleanView() {
   refs.libraryEl.innerHTML = ``;
 }
-const GENRE_NAME = 'genre_card';
-const genreName = localStorage.getItem(GENRE_NAME);
-  // console.log('genre', genreName)
- genres = JSON.parse(genreName);  
-console.log(genres);
 
 function addArticleImage(arrayToRender) {
   const card = arrayToRender
@@ -97,5 +84,6 @@ if (refs.queueBtn) {
 // let watchedData = getInfo('watched');
 // console.log("LENGTH", localData.length);
 // if (watchedData && watchedData.length > 0 ) {onClickWatched()};
+
 
 
