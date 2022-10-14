@@ -3,17 +3,16 @@ import axios from 'axios';
 const API_KEY = '3ff086ca8fded08ba42938358b3327b4';
 const BASE_URL = `https://api.themoviedb.org/3/`;
 const spinner = document.getElementById('spinner');
-const Genre_LOK = 'genre_card'
+const Genre_LOK = 'genre_card';
 
 export default class ApiService {
-    #page
+  #page;
   #id;
   #searchQuery;
   constructor() {
     this.#page = 1;
     this.#id = null;
     this.#searchQuery = '';
-   
   }
 
   async fetchGenres() {
@@ -21,7 +20,7 @@ export default class ApiService {
       `${BASE_URL}genre/movie/list?api_key=${API_KEY}&language=en-US`
     );
     const { genres } = response.data;
-    
+
     return { genres };
   }
 
@@ -32,7 +31,7 @@ export default class ApiService {
     );
     spinner.setAttribute('hidden', '');
     const data = response.data;
-     
+
     //  console.log('data', data.results)
     return data;
   }
@@ -52,12 +51,13 @@ export default class ApiService {
   async fetchFundFilms() {
     spinner.removeAttribute('hidden');
     const response = await axios.get(
-
-      `${BASE_URL}search/movie?api_key=${API_KEY}&page=${this.#page}&query=${this.#searchQuery}`
+      `${BASE_URL}search/movie?api_key=${API_KEY}&page=${this.#page}&query=${
+        this.#searchQuery
+      }`
     );
     spinner.setAttribute('hidden', '');
     const FundFilm = response.data;
-  
+
     return FundFilm;
   }
 
@@ -85,13 +85,10 @@ export default class ApiService {
     this.#page = newPage;
   }
   genreName = localStorage.getItem(Genre_LOK);
-  getImage (){
-   
-
+  getImage() {
     const genreName = localStorage.getItem(Genre_LOK);
-  console.log('genre', genreName)
-    onGenres = JSON.parse(genreName);  
-    console.log('Api', onGenres)
+    console.log('genre', genreName);
+    onGenres = JSON.parse(genreName);
+    console.log('Api', onGenres);
   }
-
 }

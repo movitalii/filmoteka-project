@@ -45,7 +45,7 @@ export default function addArticleImage(data) {
       genresArr = genresArr.slice(0, 2);
       genresArr.push(' Other...');
            
-    } 
+    }
     if (genresArr.length === 0) {
       
       genresArr.push('No genres');
@@ -56,9 +56,9 @@ export default function addArticleImage(data) {
     
     
     return result;
-  } ).map(result => onCard(result)).join('');
-    // console.log('cart', cart)
-    if (document.querySelector(`.gallery`)) {
-  document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart)};
+  }).map(result => onCard(result)).join('');
+  // console.log('cart', cart)
+  if (document.querySelector(`.gallery`)) {
+    document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart)
+  };
 }
-
