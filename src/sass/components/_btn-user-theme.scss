@@ -5,7 +5,7 @@
   &__theme {
     position: absolute;
     right: 0;
-    bottom: -35px;
+    bottom: -30px;
     width: 20px;
     height: 20px;
     flex: 0 0 30px;
@@ -15,7 +15,7 @@
     transform: scale(1);
 
     &:hover {
-      transform: scale(1.5);
+      transform: scale(1.4);
     }
 
     @include mq(tablet) {
