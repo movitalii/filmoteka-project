@@ -11,7 +11,9 @@ const input = document.querySelector(`.form-group__input`);
 
 const apiService = new ApiService();
 
-searchFormRef.addEventListener('submit', onFormSubmit);
+if (searchFormRef) {
+  searchFormRef.addEventListener('submit', onFormSubmit);
+}
 
 console.log(searchFormRef);
 

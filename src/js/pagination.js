@@ -79,7 +79,7 @@ export function createPagination(total_results) {
 
       apiService.fetchFundFilms().then(data => {
         // const movies = data.results;
-        console.log('ok', data);
+        // console.log('ok', data);
         addArticleImage(data);
       });
     }
