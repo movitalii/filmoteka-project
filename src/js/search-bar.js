@@ -2,6 +2,8 @@ import ApiService from './api-service';
 import addArticleImage from './fetchImages';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
 import { createPagination } from './pagination'; // добавил для пагинации
+import { fetchFromGallery } from './fetch-render_modal';
+import { backdrop } from './renderModal';
 
 const FUND_NAME = 'genre_card';
 
@@ -23,6 +25,7 @@ function onFormSubmit(e) {
   apiService.query = e.currentTarget.elements.searchQuery.value;
 
   apiService.fetchFundFilms().then(data => {
+    const galContainer = document.querySelector('.gallery');
     if (data.results.length === 0) {
       // input.value = '';
 
@@ -45,7 +48,13 @@ function onFormSubmit(e) {
 
       //  console.log(cartError)
       return;
+    } else {
+      // console.log(data.results);
+      saveInfo('searched', data.results);
+      // console.log(galContainer);
+      galContainer.addEventListener('click', showCard);
     }
+
     // console.log('ok', data.results.length);
     cleanView();
     addArticleImage(data);
@@ -57,4 +66,17 @@ function onFormSubmit(e) {
 
 function cleanView() {
   document.querySelector(`.gallery`).innerHTML = ``;
+}
+
+function showCard(e) {
+  e.preventDefault();
+  backdrop.classList.remove('is-hidden');
+  console.log(e.target);
+  fetchFromGallery(
+    '/' +
+      e.target.src.substring(
+        e.target.src.lastIndexOf('/') + 1,
+        e.target.src.length
+      )
+  );
 }
