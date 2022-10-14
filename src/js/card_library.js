@@ -1,4 +1,7 @@
 export default function onCardLib({poster_path, name, title, genre_ids, release_date, vote_average, first_air_date}) {
+
+  if (genre_ids.length === 0) {genre_ids.push('No genres')};
+  
     const BASE_IMAGE = `https://image.tmdb.org/t/p/original`
     return `<div class="card">
     <img src="${BASE_IMAGE}${poster_path}" alt="A FISTFUL OF LEAD" class="card_image" width="300">
@@ -8,7 +11,8 @@ export default function onCardLib({poster_path, name, title, genre_ids, release_
       <p class="card_year"> | ${
           release_date ? release_date.slice(0, 4) : first_air_date.slice(0, 4)
         }</p>  
-        <p class="card_rating">  ${ vote_average.toFixed(1)}</p>
+        <div class ="rating_holder">
+        <p class="card_rating">  ${ vote_average.toFixed(1)}</p></div>
           
     </div>
 </div>`    
