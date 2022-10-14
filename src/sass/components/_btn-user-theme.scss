@@ -1,0 +1,92 @@
+.page-action {
+  position: relative;
+  width: 100%;
+
+  &__theme {
+    position: absolute;
+    right: 0;
+    bottom: -35px;
+    width: 20px;
+    height: 20px;
+    flex: 0 0 30px;
+    cursor: pointer;
+    animation: spin 10s linear infinite;
+
+    &:hover,
+    &:focus {
+      animation-play-state: paused;
+    }
+
+    @include mq(tablet) {
+      width: 25px;
+      height: 25px;
+      bottom: -30px;
+    }
+
+    @include mq(desktop) {
+      bottom: -20px;
+    }
+  }
+}
+
+html.dark body {
+  background-color: #161618;
+}
+html.light body {
+  background-color: $secondaryColor;
+}
+
+html.dark .page-action__theme {
+  background: url('../images/sun.svg') 0 0 / 100% no-repeat;
+}
+html.light .page-action__theme {
+  background: url('../images/moon.svg') 0 0 / 100% no-repeat;
+}
+
+html.dark .card_name,
+html.dark .modal__info-value,
+html.dark .content-library__title,
+html.dark .content-library__text,
+html.dark .team-name {
+  color: $secondaryColor;
+}
+
+html.dark .modal {
+  background-color: #212124;
+  color: $secondaryColor;
+}
+
+html.dark .modal__title {
+  color: $mainAccentColor;
+}
+
+html.dark .modal__info,
+html.dark .modal__about {
+  color: $secondaryAccentColor;
+}
+
+html.dark .modal__btn-close {
+  stroke: $secondaryColor;
+}
+html.light .modal__btn-close {
+  stroke: $mainColor;
+}
+
+html.dark footer,
+html.dark .team-wrapper {
+  background-color: #212124;
+}
+
+html.dark .team-role {
+  color: #ba7446;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
