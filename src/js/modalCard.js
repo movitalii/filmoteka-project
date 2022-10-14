@@ -16,6 +16,7 @@ refs.renderModal.addEventListener('click', showCard);
 
 function showCard(e) {
   e.preventDefault();
+  backdrop.classList.toggle('is-hidden');
   fetchGallery(
     '/' +
       e.target.src.substring(
