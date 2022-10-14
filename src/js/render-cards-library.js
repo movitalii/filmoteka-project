@@ -34,6 +34,7 @@ const refs = {
   queueBtn: document.querySelector('#queue'),
   watchedBtn: document.querySelector('#watched'),
   libraryEl: document.querySelector('.library'),
+  contentEl: document.querySelector(".content"),
 };
 
 // console.log(refs.queueBtn);
@@ -43,6 +44,7 @@ const refs = {
 const onClickWatched = () => {
   refs.queueBtn.classList.remove('btn_is-active');
   refs.watchedBtn.classList.add('btn_is-active');
+  refs.contentEl.classList.add('no_display');
   cleanView();
   makeArrayToRender('watched');
 };
@@ -50,6 +52,7 @@ const onClickWatched = () => {
 const onClickQueue = () => {
   refs.queueBtn.classList.add('btn_is-active');
   refs.watchedBtn.classList.remove('btn_is-active');
+  refs.contentEl.classList.add('no_display');
   cleanView();
   makeArrayToRender('queue');
 };
