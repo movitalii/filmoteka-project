@@ -55,6 +55,13 @@ function fetchGallery(params) {
           });
           element.genre_ids = newArr;
           renderModal(element);
+          let closeModal = document.querySelector('[data-modal-close]');
+          closeModal.addEventListener('click', onCloseBtn);
+
+          function onCloseBtn() {
+            backdrop.classList.add('is-hidden');
+          }
+          
           // костыли!!! Но попробую сделать по человечески.
           let isWatched = getInfo('watched') || [];
           let alreadyWatched = isWatched.find(movie => movie.id === element.id);
