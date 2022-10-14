@@ -58,6 +58,7 @@ export default function addArticleImage(data) {
     return result;
   } ).map(result => onCard(result)).join('');
     // console.log('cart', cart)
-  document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart);
+    if (document.querySelector(`.gallery`)) {
+  document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart)};
 }
 

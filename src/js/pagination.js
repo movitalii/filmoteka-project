@@ -6,7 +6,7 @@ const Pagination = require('tui-pagination');
 const apiService = new ApiService();
 
 const input = document.querySelector(".form-group__input");
-console.log('input', document.querySelector(".form-group__input").value);
+// console.log('input', document.querySelector(".form-group__input").value);
 
 const searchFormRef = document.querySelector('#form-search');
 console.log('searchFormRef', searchFormRef);

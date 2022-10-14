@@ -84,6 +84,19 @@
     background-color: transparent;
     
     margin: 8px;
+
+    transform: scale(1);
+    transition:  box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+     &:hover {
+      color: #ffffff;
+  background-color: #ff6b08;
+  border: 1px solid #ff6b08;
+transform: scale(1.05);
+  box-shadow: 7px -7px 21px rgba(119, 64, 24, 0.6);
+     }           
+
     
 }
 
@@ -92,5 +105,10 @@
     ;
     color: white;
     border: 0;
+
+    transform: scale(1);
+    transition:  box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
 }
   
