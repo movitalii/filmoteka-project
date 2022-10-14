@@ -5,19 +5,34 @@ import addArticleImage from './fetchImages';
 const Pagination = require('tui-pagination');
 const apiService = new ApiService();
 
-const input = document.querySelector(".form-group__input");
-console.log('input', document.querySelector(".form-group__input").value);
-
-const searchFormRef = document.querySelector('#form-search');
-console.log('searchFormRef', searchFormRef);
+const input = document.querySelector('.form-group__input');
+// console.log('input', document.querySelector('.form-group__input').value);
 
 const gallery = document.querySelector('.gallery');
+
+let totalPages;
+
+function numberOfPages() {
+  apiService
+    .fetchImage()
+    .then(data => {
+      // const movies = data.results;
+      totalPages = data.total_results;
+      // console.log('Внутри мы видим это - ', totalPages);
+
+      createPagination(totalPages);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+numberOfPages();
 
 export function createPagination(total_results) {
   const container = document.getElementById('tui-pagination-container');
   const options = {
     // below default value of options
-    totalItems: 2000,
+    totalItems: total_results,
     itemsPerPage: 20,
     visiblePages: 5,
     page: 1,
@@ -44,7 +59,6 @@ export function createPagination(total_results) {
   };
 
   const pagination = new Pagination(container, options);
-  console.log('createPagination -> pagination', pagination);
 
   pagination.on('afterMove', event => {
     gallery.innerHTML = ''; // создает пустую галерею/стирает предыдущие карточки
@@ -60,18 +74,17 @@ export function createPagination(total_results) {
         addArticleImage(data);
       });
     } else {
-      apiService.query = input.value;
-
       apiService.pagePl = currentPage;
+      apiService.query = input.value;
 
       apiService.fetchFundFilms().then(data => {
         // const movies = data.results;
-        // console.log('ok', data);
+        console.log('ok', data);
         addArticleImage(data);
       });
     }
   });
 }
 
-createPagination();
+// createPagination();
 // console.log('createPagination();', createPagination());
