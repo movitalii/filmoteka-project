@@ -29,6 +29,9 @@
   top: 50%;
   left: 50%;
 
+  max-height: 95%;
+  overflow: auto;
+
   z-index: 100;
 
   width: 280px;
@@ -42,16 +45,16 @@
   transform: translate(-50%, -50%) scale(1);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    @include mq(tablet) {
-        width: 704px;
-        display: flex;
-      }
-    
-      @include mq(desktop) {
-        width: 806px;
-    
-        padding-left: 10px;
-      }
+  @include mq(tablet) {
+    width: 704px;
+    display: flex;
+  }
+
+  @include mq(desktop) {
+    width: 806px;
+
+    padding-left: 10px;
+  }
 }
 
 .modal__btn-close {
@@ -65,7 +68,7 @@
   background-color: transparent;
 
   transform: scale(1);
-  
+
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -83,19 +86,19 @@
 
   border-radius: 5px;
 
-    @include mq(tablet) {
-        margin-bottom: 0;
-        margin-right: 68px;
-    
-        width: 264px;
-        height: 374px;
-      }
-    
-      @include mq(desktop) {
-        width: 375px;
-        height: auto;
-        margin-right: 16px;
-      }
+  @include mq(tablet) {
+    margin-bottom: 0;
+    margin-right: 68px;
+
+    width: 264px;
+    height: 374px;
+  }
+
+  @include mq(desktop) {
+    width: 375px;
+    height: auto;
+    margin-right: 16px;
+  }
 }
 
 .modal__info-thumb {
@@ -116,20 +119,19 @@
   text-transform: uppercase;
 
   @include mq(desktop) {
-      font-size: 30px;
-    }
+    font-size: 30px;
+  }
 }
 
+.modal__info {
+  min-width: 215px;
+  margin-bottom: 20px;
 
-  .modal__info {
-      min-width: 215px;
-      margin-bottom: 20px;
-  
-      color: #8C8C8C;
-  
-      @include mq(desktop) {
-        min-width: 259px;
-      }
+  color: #8c8c8c;
+
+  @include mq(desktop) {
+    min-width: 259px;
+  }
 }
 
 .modal__info-entry {
@@ -156,10 +158,9 @@
   width: 36px;
   height: 16px;
 
-
-  background-color: #FF6B01;
+  background-color: #ff6b01;
   color: #000000;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   border-radius: 5px;
 }
 
@@ -192,8 +193,8 @@
   align-items: center;
 
   @include mq(desktop) {
-      padding-left: 5px;
-    }
+    padding-left: 5px;
+  }
 }
 
 .modal__btn {
@@ -205,20 +206,19 @@
   border-radius: 5px;
 
   background-color: #ffffff;
-    border: 1px solid #000000;
+  border: 1px solid #000000;
 
-    transform: scale(1);
-    transition:  box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
-                transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    
-      @include mq(tablet) {
-        width: 125px;
-      }
-    
-      @include mq(desktop) {
-        width: 136px;
-      }
+  @include mq(tablet) {
+    width: 125px;
+  }
+
+  @include mq(desktop) {
+    width: 136px;
+  }
 }
 
 .modal__btn:hover,
@@ -229,16 +229,12 @@
 
   transform: scale(1.05);
   box-shadow: 7px -7px 21px rgba(119, 64, 24, 0.6);
-
 }
 
 .modal__btn-watched {
-    margin-right: 20px;
-    
-  
-    @include mq(tablet) {
-      margin-right: 15px;
-    }
+  margin-right: 20px;
+
+  @include mq(tablet) {
+    margin-right: 15px;
+  }
 }
-
-
