@@ -1,6 +1,5 @@
 import ApiService from './api-service';
 import onCard from './card';
-import { createPagination } from './pagination'; // добавил для пагинации
 // Ed import//
 import { saveInfo, getInfo, removeInfo } from './storage_api';
 /////////////
@@ -13,9 +12,6 @@ apiService.fetchGenres().then(data => {
   genres = data.genres;
   localStorage.setItem(GENRE_NAME, JSON.stringify(genres));
   apiService.fetchImage().then(data => {
-    // console.log('YES', data.total_results);
-    createPagination(data.total_results); // добавил для пагинации
-
     addArticleImage(data);
     saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
   });
