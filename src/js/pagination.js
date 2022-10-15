@@ -1,6 +1,9 @@
 import ApiService from './api-service';
 
 import addArticleImage from './fetchImages';
+import { saveInfo } from './storage_api';
+import { backdrop } from './renderModal';
+import { fetchFromGallery } from './fetch-render_modal';
 
 const Pagination = require('tui-pagination');
 const apiService = new ApiService();
@@ -70,7 +73,8 @@ export function createPagination(total_results) {
       apiService.pagePl = currentPage;
       apiService.fetchImage().then(data => {
         // const movies = data.results;
-        // console.log('ok', data);
+        console.log('ok', data);
+        saveInfo('page', data.results);
         addArticleImage(data);
       });
     } else {
@@ -86,5 +90,21 @@ export function createPagination(total_results) {
   });
 }
 
+const galContainer = document
+  .querySelector('.gallery')
+  .addEventListener('click', showCard);
 // createPagination();
 // console.log('createPagination();', createPagination());
+function showCard(e) {
+  e.preventDefault();
+  backdrop.classList.remove('is-hidden');
+  console.log(e.target);
+  fetchFromGallery(
+    '/' +
+      e.target.src.substring(
+        e.target.src.lastIndexOf('/') + 1,
+        e.target.src.length
+      ),
+    'page'
+  );
+}
