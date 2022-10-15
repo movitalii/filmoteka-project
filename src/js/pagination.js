@@ -91,9 +91,9 @@ export function createPagination(total_results) {
   });
 }
 
-const galContainer = document
-  .querySelector('.gallery')
-  .addEventListener('click', showCard);
+const galContainer =
+  document.querySelector('.gallery') || document.querySelector('.library');
+galContainer.addEventListener('click', showCard);
 // createPagination();
 // console.log('createPagination();', createPagination());
 function showCard(e) {

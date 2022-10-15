@@ -19,7 +19,7 @@ function makeArrayToRender(arg) {
   console.log(arrayToRender);
   addArticleImage(arrayToRender);
   saveInfo('page', arrayToRender);
-  const cardGallery = document.querySelector('.container-open-modal');
+  const cardGallery = document.querySelector('.library');
   cardGallery.addEventListener('click', clickHandler);
   function clickHandler(e) {
     e.preventDefault();
