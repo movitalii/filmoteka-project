@@ -50,7 +50,7 @@ function onFormSubmit(e) {
       return;
     } else {
       // console.log(data.results);
-      saveInfo('searched', data.results);
+      saveInfo('page', data.results);
       // console.log(galContainer);
       galContainer.addEventListener('click', showCard);
     }
@@ -71,12 +71,12 @@ function cleanView() {
 function showCard(e) {
   e.preventDefault();
   backdrop.classList.remove('is-hidden');
-  console.log(e.target);
   fetchFromGallery(
     '/' +
       e.target.src.substring(
         e.target.src.lastIndexOf('/') + 1,
         e.target.src.length
-      )
+      ),
+    'page'
   );
 }

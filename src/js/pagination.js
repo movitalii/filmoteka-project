@@ -1,6 +1,9 @@
 import ApiService from './api-service';
 
 import addArticleImage from './fetchImages';
+import { saveInfo } from './storage_api';
+import { backdrop } from './renderModal';
+import { fetchFromGallery } from './fetch-render_modal';
 
 const Pagination = require('tui-pagination');
 const apiService = new ApiService();
@@ -10,23 +13,23 @@ const input = document.querySelector('.form-group__input');
 
 const gallery = document.querySelector('.gallery');
 
-let totalPages;
+// let totalPages;
 
-function numberOfPages() {
-  apiService
-    .fetchImage()
-    .then(data => {
-      // const movies = data.results;
-      totalPages = data.total_results;
-      // console.log('Внутри мы видим это - ', totalPages);
+// function numberOfPages() {
+//   apiService
+//     .fetchImage()
+//     .then(data => {
+//       // const movies = data.results;
+//       totalPages = data.total_results;
+//       // console.log('Внутри мы видим это - ', totalPages);
 
-      createPagination(totalPages);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-}
-numberOfPages();
+//       createPagination(totalPages);
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+// }
+// numberOfPages();
 
 export function createPagination(total_results) {
   const container = document.getElementById('tui-pagination-container');
@@ -71,6 +74,7 @@ export function createPagination(total_results) {
       apiService.fetchImage().then(data => {
         // const movies = data.results;
         // console.log('ok', data);
+        saveInfo('page', data.results);
         addArticleImage(data);
       });
     } else {
@@ -80,11 +84,28 @@ export function createPagination(total_results) {
       apiService.fetchFundFilms().then(data => {
         // const movies = data.results;
         // console.log('ok', data);
+        saveInfo('page', data.results);
         addArticleImage(data);
       });
     }
   });
 }
 
+const galContainer = document
+  .querySelector('.gallery')
+  .addEventListener('click', showCard);
 // createPagination();
 // console.log('createPagination();', createPagination());
+function showCard(e) {
+  e.preventDefault();
+  backdrop.classList.remove('is-hidden');
+  console.log(e.target);
+  fetchFromGallery(
+    '/' +
+      e.target.src.substring(
+        e.target.src.lastIndexOf('/') + 1,
+        e.target.src.length
+      ),
+    'page'
+  );
+}

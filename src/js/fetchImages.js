@@ -1,5 +1,6 @@
 import ApiService from './api-service';
 import onCard from './card';
+import { createPagination } from './pagination'; // добавил для пагинации
 // Ed import//
 import { saveInfo, getInfo, removeInfo } from './storage_api';
 /////////////
@@ -7,26 +8,26 @@ const apiService = new ApiService();
 
 const GENRE_NAME = 'genre_card';
 
-let genres = []
+let genres = [];
 apiService.fetchGenres().then(data => {
-   genres = data.genres
-   localStorage.setItem(GENRE_NAME, JSON.stringify(genres))
-   apiService.fetchImage().then(data => {
-  
-    addArticleImage(data); 
+  genres = data.genres;
+  localStorage.setItem(GENRE_NAME, JSON.stringify(genres));
+  apiService.fetchImage().then(data => {
+    // console.log('YES', data.total_results);
+    createPagination(data.total_results); // добавил для пагинации
+
+    addArticleImage(data);
     saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
-   
   });
-//  console.log('ok', data.genres);
+  //  console.log('ok', data.genres);
 });
-localStorage.setItem(GENRE_NAME, JSON.stringify(genres))
+localStorage.setItem(GENRE_NAME, JSON.stringify(genres));
 const genreName = localStorage.getItem(GENRE_NAME);
-  // console.log('genre', genreName)
- genres = JSON.parse(genreName);  
-console.log(genres)
+// console.log('genre', genreName)
+genres = JSON.parse(genreName);
+console.log(genres);
 
 export default function addArticleImage(data) {
-  
   // console.log('image', data);
   const cart = data.results.flatMap(result => {
     let genresArr = [];
@@ -80,6 +81,6 @@ export default function addArticleImage(data) {
   }).map(result => onCard(result)).join('');
   // console.log('cart', cart)
   if (document.querySelector(`.gallery`)) {
-    document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart)
-  };
+    document.querySelector(`.gallery`).insertAdjacentHTML('beforeend', cart);
+  }
 }

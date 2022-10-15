@@ -5,16 +5,17 @@
   &__theme {
     position: absolute;
     right: 0;
-    bottom: -35px;
+    bottom: -30px;
     width: 20px;
     height: 20px;
     flex: 0 0 30px;
     cursor: pointer;
-    animation: spin 10s linear infinite;
+    border-radius: 50%;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
 
-    &:hover,
-    &:focus {
-      animation-play-state: paused;
+    &:hover {
+      transform: scale(1.4);
     }
 
     @include mq(tablet) {
@@ -37,10 +38,10 @@ html.light body {
 }
 
 html.dark .page-action__theme {
-  background: url('../images/sun.svg') 0 0 / 100% no-repeat;
+  background: url('../images/sun2.svg') 0 0 / 100% no-repeat;
 }
 html.light .page-action__theme {
-  background: url('../images/moon.svg') 0 0 / 100% no-repeat;
+  background: url('../images/moon7.svg') 0 0 / 100% no-repeat;
 }
 
 html.dark .card_name,
@@ -62,7 +63,7 @@ html.dark .modal__title {
 
 html.dark .modal__info,
 html.dark .modal__about {
-  color: $secondaryAccentColor;
+  color: #8b949e;
 }
 
 html.dark .modal__btn-close {
