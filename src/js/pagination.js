@@ -69,11 +69,6 @@ export function createPagination(total_results) {
 
     const currentPage = event.page;
     // console.log('currentPage', currentPage);
-    let inputData = apiService.fetchFundFilms().then(data => {
-      // const movies = data.results;
-      console.log('ok1', data);
-      return data;
-    });
 
     if (input.value === '') {
       apiService.pagePl = currentPage;
@@ -83,30 +78,17 @@ export function createPagination(total_results) {
         saveInfo('page', data.results);
         addArticleImage(data);
       });
-    }
-    // if (inputData.total_results !== 0)
-    else {
+    } else {
       apiService.pagePl = currentPage;
       apiService.query = input.value;
 
       apiService.fetchFundFilms().then(data => {
         // const movies = data.results;
-        console.log('ok2', data);
+        // console.log('ok', data);
         saveInfo('page', data.results);
         addArticleImage(data);
       });
     }
-    // else {
-    //   apiService.pagePl = currentPage;
-    //   apiService.query = input.value;
-
-    //   apiService.fetchFundFilms().then(data => {
-    //     // const movies = data.results;
-    //     console.log('ok3', data);
-    //     // saveInfo('page', data.results);
-    //     addArticleImage(inputData);
-    //   });
-    // }
   });
 }
 
