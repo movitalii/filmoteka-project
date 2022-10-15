@@ -10,11 +10,12 @@
     height: 20px;
     flex: 0 0 30px;
     cursor: pointer;
-    animation: spin 10s linear infinite;
+    border-radius: 50%;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
 
-    &:hover,
-    &:focus {
-      animation-play-state: paused;
+    &:hover {
+      transform: scale(1.5);
     }
 
     @include mq(tablet) {
@@ -37,10 +38,10 @@ html.light body {
 }
 
 html.dark .page-action__theme {
-  background: url('../images/sun.svg') 0 0 / 100% no-repeat;
+  background: url('../images/sun2.svg') 0 0 / 100% no-repeat;
 }
 html.light .page-action__theme {
-  background: url('../images/moon.svg') 0 0 / 100% no-repeat;
+  background: url('../images/moon7.svg') 0 0 / 100% no-repeat;
 }
 
 html.dark .card_name,
