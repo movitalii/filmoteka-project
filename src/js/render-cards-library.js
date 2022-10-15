@@ -1,7 +1,7 @@
 // по нажатию кнопки WATCHED в значение keyOfLocalStorage вносим ключ локал сторадж просмотренных и добавляем/убираем класс .is-active
 // по нажатию кнопки QUEUE в значение keyOfLocalStorage вносим ключ локал сторадж очереди и добавляем/убираем класс .is-active
 // по нажатию на карточку открываем модальное окно
-
+import { createPagination } from './pagination'; // добавил для пагинации
 import axios from 'axios';
 import ApiService from './api-service';
 import onCardLib from './card_library';
@@ -15,6 +15,10 @@ let arrayToRender = [];
 function makeArrayToRender(arg) {
   arrayToRender = getInfo(arg);
   console.log(arrayToRender);
+
+  console.log('Give me answer - ', arrayToRender.length); // отсебятина
+  createPagination(arrayToRender.length); // добавил для пагинации
+
   addArticleImage(arrayToRender);
 }
 
@@ -34,7 +38,7 @@ const refs = {
   queueBtn: document.querySelector('#queue'),
   watchedBtn: document.querySelector('#watched'),
   libraryEl: document.querySelector('.library'),
-  contentEl: document.querySelector(".content"),
+  contentEl: document.querySelector('.content'),
 };
 
 // console.log(refs.queueBtn);
@@ -87,6 +91,3 @@ if (refs.queueBtn) {
 // let watchedData = getInfo('watched');
 // console.log("LENGTH", localData.length);
 // if (watchedData && watchedData.length > 0 ) {onClickWatched()};
-
-
-
