@@ -71,7 +71,6 @@ function cleanView() {
 function showCard(e) {
   e.preventDefault();
   backdrop.classList.remove('is-hidden');
-  console.log(e.target);
   fetchFromGallery(
     '/' +
       e.target.src.substring(

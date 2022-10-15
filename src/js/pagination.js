@@ -13,23 +13,23 @@ const input = document.querySelector('.form-group__input');
 
 const gallery = document.querySelector('.gallery');
 
-let totalPages;
+// let totalPages;
 
-function numberOfPages() {
-  apiService
-    .fetchImage()
-    .then(data => {
-      // const movies = data.results;
-      totalPages = data.total_results;
-      // console.log('Внутри мы видим это - ', totalPages);
+// function numberOfPages() {
+//   apiService
+//     .fetchImage()
+//     .then(data => {
+//       // const movies = data.results;
+//       totalPages = data.total_results;
+//       // console.log('Внутри мы видим это - ', totalPages);
 
-      createPagination(totalPages);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-}
-numberOfPages();
+//       createPagination(totalPages);
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+// }
+// numberOfPages();
 
 export function createPagination(total_results) {
   const container = document.getElementById('tui-pagination-container');

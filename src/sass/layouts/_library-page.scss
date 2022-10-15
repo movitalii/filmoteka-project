@@ -87,6 +87,7 @@
     text-transform: uppercase;
     color: #000000;
     font-weight: 500;
+    font-size: 12px;
 
     @include mq(tablet) {
         margin-top: 8px;

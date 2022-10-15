@@ -34,7 +34,7 @@ const refs = {
   queueBtn: document.querySelector('#queue'),
   watchedBtn: document.querySelector('#watched'),
   libraryEl: document.querySelector('.library'),
-  contentEl: document.querySelector('.content'),
+  contentEl: document.querySelector(".content"),
 };
 
 // console.log(refs.queueBtn);
@@ -87,3 +87,6 @@ if (refs.queueBtn) {
 // let watchedData = getInfo('watched');
 // console.log("LENGTH", localData.length);
 // if (watchedData && watchedData.length > 0 ) {onClickWatched()};
+
+
+
