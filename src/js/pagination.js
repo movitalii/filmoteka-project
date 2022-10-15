@@ -12,6 +12,7 @@ const input = document.querySelector('.form-group__input');
 // console.log('input', document.querySelector('.form-group__input').value);
 
 const gallery = document.querySelector('.gallery');
+const library = document.querySelector('.library');
 
 // let totalPages;
 
