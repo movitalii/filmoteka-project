@@ -12,16 +12,17 @@ const refs = {
 };
 
 const apiService = new ApiService();
-if(refs.renderModal) {
-refs.renderModal.addEventListener('click', showCard)};
+if (refs.renderModal) {
+  refs.renderModal.addEventListener('click', showCard);
+}
 
 window.addEventListener('keydown', closeModalHandler);
 
-  function closeModalHandler(e) {
-    if (e.code === 'Escape') {
-      backdrop.classList.add('is-hidden');
-    }
+function closeModalHandler(e) {
+  if (e.code === 'Escape') {
+    backdrop.classList.add('is-hidden');
   }
+}
 
 function showCard(e) {
   e.preventDefault();
@@ -62,7 +63,7 @@ function fetchGallery(params) {
           function onCloseBtn() {
             backdrop.classList.add('is-hidden');
           }
-          
+
           // костыли!!! Но попробую сделать по человечески.
           let isWatched = getInfo('watched') || [];
           let alreadyWatched = isWatched.find(movie => movie.id === element.id);

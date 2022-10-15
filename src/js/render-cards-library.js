@@ -6,6 +6,8 @@ import axios from 'axios';
 import ApiService from './api-service';
 import onCardLib from './card_library';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
+import { fetchFromGallery } from './fetch-render_modal';
+import { renderModal, backdrop } from './renderModal';
 const apiService = new ApiService();
 
 //localStorageChecker
@@ -16,6 +18,22 @@ function makeArrayToRender(arg) {
   arrayToRender = getInfo(arg);
   console.log(arrayToRender);
   addArticleImage(arrayToRender);
+  saveInfo('page', arrayToRender);
+  const cardGallery = document.querySelector('.container-open-modal');
+  cardGallery.addEventListener('click', clickHandler);
+  function clickHandler(e) {
+    e.preventDefault();
+    backdrop.classList.remove('is-hidden');
+    fetchFromGallery(
+      '/' +
+        e.target.src.substring(
+          e.target.src.lastIndexOf('/') + 1,
+          e.target.src.length
+        ),
+      'page'
+    );
+  }
+  console.log(cardGallery);
 }
 
 function cleanView() {
@@ -26,8 +44,11 @@ function addArticleImage(arrayToRender) {
   const card = arrayToRender
     .map(arrayToRender => onCardLib(arrayToRender))
     .join('');
-    if (arrayToRender.length > 0) {refs.contentEl.classList.add('no_display')} 
-  else if (arrayToRender.length === 0) {refs.contentEl.classList.remove('no_display') };
+  if (arrayToRender.length > 0) {
+    refs.contentEl.classList.add('no_display');
+  } else if (arrayToRender.length === 0) {
+    refs.contentEl.classList.remove('no_display');
+  }
 
   refs.libraryEl.insertAdjacentHTML('beforeend', card);
 }
@@ -36,7 +57,7 @@ const refs = {
   queueBtn: document.querySelector('#queue'),
   watchedBtn: document.querySelector('#watched'),
   libraryEl: document.querySelector('.library'),
-  contentEl: document.querySelector(".content"),
+  contentEl: document.querySelector('.content'),
 };
 
 // console.log(refs.queueBtn);
@@ -89,6 +110,3 @@ if (refs.queueBtn) {
 // let watchedData = getInfo('watched');
 // console.log("LENGTH", localData.length);
 // if (watchedData && watchedData.length > 0 ) {onClickWatched()};
-
-
-
