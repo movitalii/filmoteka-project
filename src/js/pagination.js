@@ -73,7 +73,7 @@ export function createPagination(total_results) {
       apiService.pagePl = currentPage;
       apiService.fetchImage().then(data => {
         // const movies = data.results;
-        console.log('ok', data);
+        // console.log('ok', data);
         saveInfo('page', data.results);
         addArticleImage(data);
       });
@@ -84,6 +84,7 @@ export function createPagination(total_results) {
       apiService.fetchFundFilms().then(data => {
         // const movies = data.results;
         // console.log('ok', data);
+        saveInfo('page', data.results);
         addArticleImage(data);
       });
     }
