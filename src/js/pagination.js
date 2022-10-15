@@ -9,6 +9,7 @@ const input = document.querySelector('.form-group__input');
 // console.log('input', document.querySelector('.form-group__input').value);
 
 const gallery = document.querySelector('.gallery');
+const library = document.querySelector('.library');
 
 // let totalPages;
 
@@ -88,3 +89,54 @@ export function createPagination(total_results) {
 
 // createPagination();
 // console.log('createPagination();', createPagination());
+export function createPaginationLibrary(total_results) {
+  const container = document.getElementById('tui-pagination-container');
+  const options = {
+    // below default value of options
+    totalItems: total_results,
+    itemsPerPage: 20,
+    visiblePages: 5,
+    page: 1,
+    centerAlign: true,
+    firstItemClassName: 'tui-first-child',
+    lastItemClassName: 'tui-last-child',
+    template: {
+      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+      currentPage:
+        '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}} custom-class-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<span class="tui-page-btn tui-is-disabled tui-{{type}} custom-class-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</span>',
+      moreButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip custom-class-{{type}}">' +
+        '<span class="tui-ico-ellip">...</span>' +
+        '</a>',
+    },
+  };
+
+  const pagination = new Pagination(container, options);
+
+  pagination.on('afterMove', event => {
+    library.innerHTML = ''; // создает пустую галерею/стирает предыдущие карточки
+
+    const currentPage = event.page;
+    // console.log('currentPage', currentPage);
+
+    apiService.pagePl = currentPage;
+    // apiService.query = input.value;
+
+    apiService
+      .fetchFundFilms()
+      .then(data => {
+        // const movies = data.results;
+        // console.log('ok', data);
+        addArticleImage(data);
+      })
+      .catch(error => console.log(error));
+  });
+}
