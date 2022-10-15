@@ -17,11 +17,14 @@ apiService.fetchGenres().then(data => {
     addArticleImage(data);
 
     createPagination(data.total_results); // Пагинация
+    // const totalNumberPages = data.total_results;
+    // console.log('Я не должен быть здесь', totalNumberPages);
 
     saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
   });
   //  console.log('ok', data.genres);
 });
+
 localStorage.setItem(GENRE_NAME, JSON.stringify(genres));
 const genreName = localStorage.getItem(GENRE_NAME);
 // console.log('genre', genreName)

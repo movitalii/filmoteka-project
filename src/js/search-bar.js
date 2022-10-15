@@ -6,6 +6,7 @@ import { fetchFromGallery } from './fetch-render_modal';
 import { backdrop } from './renderModal';
 
 const FUND_NAME = 'genre_card';
+let previousSearch = ''; // от Василия костыль
 
 const searchFormRef = document.querySelector('#form-search');
 const errorMessage = document.querySelector('.error-notification');
@@ -26,8 +27,12 @@ function onFormSubmit(e) {
 
   apiService.fetchFundFilms().then(data => {
     const galContainer = document.querySelector('.gallery');
+
     if (data.results.length === 0) {
       // input.value = '';
+      data = previousSearch;
+      console.log('????', data); // проверка
+
       document
         .querySelector('.error-notification')
         .insertAdjacentHTML(
@@ -52,6 +57,10 @@ function onFormSubmit(e) {
     } else {
       // console.log(data.results);
       saveInfo('page', data.results);
+
+      previousSearch = data;
+      console.log('Help - yes, use it', data.total_results); // проверка
+
       // console.log(galContainer);
       galContainer.addEventListener('click', showCard);
     }
@@ -61,7 +70,7 @@ function onFormSubmit(e) {
     addArticleImage(data);
 
     createPagination(data.total_results); // добавил для пагинации
-    // console.log(' !!!!!!!!! ', createPagination(data.total_results));
+    console.log(' !!!!!!!!! ', data); // проверка
   });
 }
 
