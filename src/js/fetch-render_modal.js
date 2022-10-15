@@ -1,8 +1,8 @@
 import { renderModal, backdrop } from './renderModal';
 import { getInfo, saveInfo } from './storage_api';
 
-export function fetchFromGallery(args) {
-  let searchPage = getInfo('searched');
+export function fetchFromGallery(args, key) {
+  let searchPage = getInfo(key);
   let arrayOfGenres = [];
   let genres = getInfo('genre_card');
   searchPage.forEach(element => {
