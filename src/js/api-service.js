@@ -27,7 +27,7 @@ export default class ApiService {
   async fetchImage() {
     spinner.removeAttribute('hidden');
     const response = await axios.get(
-      `${BASE_URL}trending/all/day?api_key=${API_KEY}&page=${this.#page}`
+      `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${this.#page}`
     );
     spinner.setAttribute('hidden', '');
     const data = response.data;
