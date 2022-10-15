@@ -26,6 +26,8 @@ function addArticleImage(arrayToRender) {
   const card = arrayToRender
     .map(arrayToRender => onCardLib(arrayToRender))
     .join('');
+    if (arrayToRender.length > 0) {refs.contentEl.classList.add('no_display')} 
+  else if (arrayToRender.length === 0) {refs.contentEl.classList.remove('no_display') };
 
   refs.libraryEl.insertAdjacentHTML('beforeend', card);
 }
