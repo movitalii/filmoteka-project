@@ -14,9 +14,11 @@ let arrayToRender = [];
 // функція викликається при кліку, звертається до локал стораж, забирає масив і по ньому рендерить в розмітку
 function makeArrayToRender(arg) {
   arrayToRender = getInfo(arg);
-  console.log(arrayToRender);
+  // console.log("ARRAYTORENDER", arrayToRender);
+  if (arrayToRender.length > 0) {refs.contentEl.classList.add('no_display')} 
+  else if (arrayToRender.length === 0) {refs.contentEl.classList.remove('no_display') };
 
-  console.log('Give me answer - ', arrayToRender.length); // отсебятина
+  // console.log('Give me answer - ', arrayToRender.length); // отсебятина
   createPagination(arrayToRender.length); // добавил для пагинации
 
   addArticleImage(arrayToRender);
@@ -30,6 +32,7 @@ function addArticleImage(arrayToRender) {
   const card = arrayToRender
     .map(arrayToRender => onCardLib(arrayToRender))
     .join('');
+  
 
   refs.libraryEl.insertAdjacentHTML('beforeend', card);
 }
@@ -48,15 +51,15 @@ const refs = {
 const onClickWatched = () => {
   refs.queueBtn.classList.remove('btn_is-active');
   refs.watchedBtn.classList.add('btn_is-active');
-  refs.contentEl.classList.add('no_display');
+  
   cleanView();
   makeArrayToRender('watched');
+
 };
 
 const onClickQueue = () => {
   refs.queueBtn.classList.add('btn_is-active');
   refs.watchedBtn.classList.remove('btn_is-active');
-  refs.contentEl.classList.add('no_display');
   cleanView();
   makeArrayToRender('queue');
 };
@@ -81,6 +84,7 @@ if (refs.queueBtn) {
     return;
   } else if (watchedData.length > 0) {
     onClickWatched();
+
   } else if (queueData.length > 0) {
     onClickQueue();
   } else {
