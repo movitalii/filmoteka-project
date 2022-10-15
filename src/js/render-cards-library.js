@@ -54,8 +54,8 @@ function addArticleImage(arrayToRender) {
 }
 
 const refs = {
-  queueBtn: document.querySelector('#queue'),
-  watchedBtn: document.querySelector('#watched'),
+  queueBtn: document.querySelector('#queue-lib'),
+  watchedBtn: document.querySelector('#watched-lib'),
   libraryEl: document.querySelector('.library'),
   contentEl: document.querySelector('.content'),
 };
