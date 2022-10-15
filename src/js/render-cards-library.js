@@ -5,6 +5,8 @@ import axios from 'axios';
 import ApiService from './api-service';
 import onCardLib from './card_library';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
+import { fetchFromGallery } from './fetch-render_modal';
+import { renderModal, backdrop } from './renderModal';
 const apiService = new ApiService();
 
 //localStorageChecker
@@ -15,6 +17,22 @@ function makeArrayToRender(arg) {
   arrayToRender = getInfo(arg);
   console.log(arrayToRender);
   addArticleImage(arrayToRender);
+  saveInfo('page', arrayToRender);
+  const cardGallery = document.querySelector('.container-open-modal');
+  cardGallery.addEventListener('click', clickHandler);
+  function clickHandler(e) {
+    e.preventDefault();
+    backdrop.classList.remove('is-hidden');
+    fetchFromGallery(
+      '/' +
+        e.target.src.substring(
+          e.target.src.lastIndexOf('/') + 1,
+          e.target.src.length
+        ),
+      'page'
+    );
+  }
+  console.log(cardGallery);
 }
 
 function cleanView() {
@@ -35,8 +53,8 @@ function addArticleImage(arrayToRender) {
 }
 
 const refs = {
-  queueBtn: document.querySelector('#queue'),
-  watchedBtn: document.querySelector('#watched'),
+  queueBtn: document.querySelector('#queue-lib'),
+  watchedBtn: document.querySelector('#watched-lib'),
   libraryEl: document.querySelector('.library'),
   contentEl: document.querySelector('.content'),
 };
