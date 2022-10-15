@@ -76,6 +76,7 @@ function showCard(e) {
       e.target.src.substring(
         e.target.src.lastIndexOf('/') + 1,
         e.target.src.length
-      )
+      ),
+    'searched'
   );
 }

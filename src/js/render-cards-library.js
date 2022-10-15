@@ -6,7 +6,9 @@ import axios from 'axios';
 import ApiService from './api-service';
 import onCardLib from './card_library';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
+import { fetchFromGallery } from './fetch-render_modal';
 const apiService = new ApiService();
+import { backdrop } from './renderModal';
 
 //localStorageChecker
 
@@ -46,6 +48,7 @@ const refs = {
 
 // console.log(refs.queueBtn);
 // console.log(refs.watchedBtn);
+
 // console.log(refs.libraryEl);
 
 const onClickWatched = () => {
@@ -62,6 +65,7 @@ const onClickQueue = () => {
   refs.watchedBtn.classList.remove('btn_is-active');
   cleanView();
   makeArrayToRender('queue');
+  console.log(galContainer);
 };
 
 if (refs.queueBtn) {
@@ -92,6 +96,26 @@ if (refs.queueBtn) {
   }
 }
 
+
+// const galContainer = document.querySelector('.library-page');
+// galContainer.addEventListener('click', showCard);
+// // let watchedData = getInfo('watched');
+// // console.log("LENGTH", localData.length);
+// // if (watchedData && watchedData.length > 0 ) {onClickWatched()};
+// function showCard(e) {
+//   e.preventDefault();
+//   backdrop.classList.remove('is-hidden');
+//   console.log(e.target);
+//   fetchFromGallery(
+//     '/' +
+//       e.target.src.substring(
+//         e.target.src.lastIndexOf('/') + 1,
+//         e.target.src.length
+//       )
+//   );
+// }
+
 // let watchedData = getInfo('watched');
 // console.log("LENGTH", localData.length);
 // if (watchedData && watchedData.length > 0 ) {onClickWatched()};
+
