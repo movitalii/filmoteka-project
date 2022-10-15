@@ -31,7 +31,7 @@ export default class ApiService {
     );
     spinner.setAttribute('hidden', '');
     const data = response.data;
-    console.log('data', data.results)
+
     //  console.log('data', data.results)
     return data;
   }
@@ -57,7 +57,7 @@ export default class ApiService {
     );
     spinner.setAttribute('hidden', '');
     const FundFilm = response.data;
-      console.log('data', FundFilm.results)
+
     return FundFilm;
   }
 

@@ -28,7 +28,6 @@ function onFormSubmit(e) {
     const galContainer = document.querySelector('.gallery');
     if (data.results.length === 0) {
       // input.value = '';
-
       document
         .querySelector('.error-notification')
         .insertAdjacentHTML(
@@ -41,6 +40,8 @@ function onFormSubmit(e) {
           if (document.querySelector(`.error-notification`)) {
             document.querySelector('.error-notification').innerHTML = '';
             addArticleImage(data);
+            // console.log('???', data); // проверка
+
             saveInfo(data.page, data.results);
           }
         }, 2000);
