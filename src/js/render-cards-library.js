@@ -1,7 +1,6 @@
 // по нажатию кнопки WATCHED в значение keyOfLocalStorage вносим ключ локал сторадж просмотренных и добавляем/убираем класс .is-active
 // по нажатию кнопки QUEUE в значение keyOfLocalStorage вносим ключ локал сторадж очереди и добавляем/убираем класс .is-active
 // по нажатию на карточку открываем модальное окно
-
 import axios from 'axios';
 import ApiService from './api-service';
 import onCardLib from './card_library';

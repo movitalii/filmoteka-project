@@ -1,11 +1,12 @@
 import ApiService from './api-service';
 import addArticleImage from './fetchImages';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
-import { createPagination } from './pagination'; // добавил для пагинации
+import { createPagination, createPaginationForSearch } from './pagination'; // добавил для пагинации
 import { fetchFromGallery } from './fetch-render_modal';
 import { backdrop } from './renderModal';
 
 const FUND_NAME = 'genre_card';
+let previousSearch = ''; // от Василия костыль
 
 const searchFormRef = document.querySelector('#form-search');
 const errorMessage = document.querySelector('.error-notification');
@@ -17,15 +18,18 @@ if (searchFormRef) {
   searchFormRef.addEventListener('submit', onFormSubmit);
 }
 
-console.log(searchFormRef);
+// console.log(searchFormRef);
 
 function onFormSubmit(e) {
   e.preventDefault();
+  const searchRequest = e.currentTarget.searchQuery.value.trim();
 
-  apiService.query = e.currentTarget.elements.searchQuery.value;
+  if (searchRequest !== '') {
+    apiService.query = e.currentTarget.elements.searchQuery.value;
 
   apiService.fetchFundFilms().then(data => {
     const galContainer = document.querySelector('.gallery');
+
     if (data.results.length === 0) {
       // input.value = '';
 
@@ -85,6 +89,7 @@ function onFormSubmit(e) {
     } else {
       // console.log(data.results);
       saveInfo('page', data.results);
+
       // console.log(galContainer);
       galContainer.addEventListener('click', showCard);
     }
@@ -93,9 +98,12 @@ function onFormSubmit(e) {
     cleanView();
     addArticleImage(data);
 
-    createPagination(data.total_results); // добавил для пагинации
-    // console.log(' !!!!!!!!! ', createPagination(data.total_results));
+    createPaginationForSearch(data.total_results);
+    // console.log(' !!!!!!!!! ', data); // проверка
   });
+  }
+
+  
 }
 
 function cleanView() {
