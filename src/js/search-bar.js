@@ -36,12 +36,46 @@ function onFormSubmit(e) {
           'Search result not successful. Enter the correct movie name.'
         );
 
+        apiService.fetchGenres().then(data => {
+          genres = data.genres;
+          localStorage.setItem(GENRE_NAME, JSON.stringify(genres));
+          apiService.fetchImage().then(data => {
+            
+            // console.log('YES', data.total_results);
+            createPagination(data.total_results); // добавил для пагинации
+        
+            addArticleImage(data);
+            saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
+          });
+          //  console.log('ok', data.genres);
+        });
+
       apiService.fetchImage().then(data => {
         setTimeout(() => {
           if (document.querySelector(`.error-notification`)) {
             document.querySelector('.error-notification').innerHTML = '';
-            addArticleImage(data);
+            input.value = '';
+            // addArticleImage(data);
             saveInfo(data.page, data.results);
+            // let genres = [];
+            apiService.fetchImage().then(data => {
+              
+              createPagination(data.total_results); // добавил для пагинации
+              
+              saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
+              
+            })
+            input.value = '';
+            const GENRE_NAME = 'genre_card';
+            let genres = [];
+
+            const genreName = localStorage.getItem(GENRE_NAME);
+// console.log('genre', genreName)
+            genres = JSON.parse(genreName);
+            console.log(genres);
+            document.querySelector(`.gallery`).innerHTML = '';
+            addArticleImage(data);
+           
           }
         }, 2000);
       });
