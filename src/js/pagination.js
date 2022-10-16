@@ -70,89 +70,89 @@ export function createPagination(total_results) {
     const currentPage = event.page;
     // console.log('currentPage', currentPage);
 
-    if (input.value === '') {
-      apiService.pagePl = currentPage;
-      apiService.fetchImage().then(data => {
-        // const movies = data.results;
-        // console.log('ok', data);
-        saveInfo('page', data.results);
-        addArticleImage(data);
-      });
-    } else {
-      apiService.pagePl = currentPage;
-      apiService.query = input.value;
+    // if (input.value === '') {
+    apiService.pagePl = currentPage;
+    apiService.fetchImage().then(data => {
+      // const movies = data.results;
+      // console.log('ok', data);
+      saveInfo('page', data.results);
+      addArticleImage(data);
+    });
+    // } else {
+    //   apiService.pagePl = currentPage;
+    //   apiService.query = input.value;
 
-      apiService.fetchFundFilms().then(data => {
-        // const movies = data.results;
-        // console.log('ok-click', data.total_results);
-        if (data.total_results === 0) {
-          apiService.pagePl = currentPage;
-          apiService.fetchImage().then(data => {
-            // const movies = data.results;
-            // console.log('ok', data);
-            saveInfo('page', data.results);
-            addArticleImage(data);
-          });
-        }
-        saveInfo('page', data.results);
-        addArticleImage(data);
-      });
-    }
+    //   apiService.fetchFundFilms().then(data => {
+    //     // const movies = data.results;
+    //     // console.log('ok-click', data.total_results);
+    //     if (data.total_results === 0) {
+    //       apiService.pagePl = currentPage;
+    //       apiService.fetchImage().then(data => {
+    //         // const movies = data.results;
+    //         // console.log('ok', data);
+    //         saveInfo('page', data.results);
+    //         addArticleImage(data);
+    //       });
+    //     }
+    //     saveInfo('page', data.results);
+    //     addArticleImage(data);
+    //   });
+    // }
   });
 }
 
-// export function createPaginationForSearch(total_results, searchQuery) {
-//   const container = document.getElementById('tui-pagination-container');
-//   const options = {
-//     // below default value of options
-//     totalItems: total_results,
-//     itemsPerPage: 20,
-//     visiblePages: 5,
-//     page: 1,
-//     centerAlign: true,
-//     firstItemClassName: 'tui-first-child',
-//     lastItemClassName: 'tui-last-child',
-//     template: {
-//       page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-//       currentPage:
-//         '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-//       moveButton:
-//         '<a href="#" class="tui-page-btn tui-{{type}} custom-class-{{type}}">' +
-//         '<span class="tui-ico-{{type}}">{{type}}</span>' +
-//         '</a>',
-//       disabledMoveButton:
-//         '<span class="tui-page-btn tui-is-disabled tui-{{type}} custom-class-{{type}}">' +
-//         '<span class="tui-ico-{{type}}">{{type}}</span>' +
-//         '</span>',
-//       moreButton:
-//         '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip custom-class-{{type}}">' +
-//         '<span class="tui-ico-ellip">...</span>' +
-//         '</a>',
-//     },
-//   };
+export function createPaginationForSearch(total_results) {
+  const container = document.getElementById('tui-pagination-container');
+  const options = {
+    // below default value of options
+    totalItems: total_results,
+    itemsPerPage: 20,
+    visiblePages: 5,
+    page: 1,
+    centerAlign: true,
+    firstItemClassName: 'tui-first-child',
+    lastItemClassName: 'tui-last-child',
+    template: {
+      page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+      currentPage:
+        '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}} custom-class-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<span class="tui-page-btn tui-is-disabled tui-{{type}} custom-class-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</span>',
+      moreButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip custom-class-{{type}}">' +
+        '<span class="tui-ico-ellip">...</span>' +
+        '</a>',
+    },
+  };
 
-//   const pagination = new Pagination(container, options);
+  const pagination = new Pagination(container, options);
 
-//   pagination.on('afterMove', event => {
-//     gallery.innerHTML = ''; // создает пустую галерею/стирает предыдущие карточки
+  pagination.on('afterMove', event => {
+    gallery.innerHTML = ''; // создает пустую галерею/стирает предыдущие карточки
 
-//     const currentPage = event.page;
-//     // console.log('currentPage', currentPage);
+    const currentPage = event.page;
+    // console.log('currentPage', currentPage);
 
-//     apiService.pagePl = currentPage;
-//     apiService.query = searchQuery;
+    apiService.pagePl = currentPage;
+    apiService.query = input.value;
 
-//     apiService
-//       .fetchFundFilms()
-//       .then(data => {
-//         // const movies = data.results;
-//         console.log('ok-click', data);
-//         saveInfo('page', data.results);
-//         addArticleImage(data);
-//       })
-//       .catch(error => console.log(error));
-//   });
-// }
+    apiService
+      .fetchFundFilms()
+      .then(data => {
+        // const movies = data.results;
+        console.log('ok-click', data);
+        saveInfo('page', data.results);
+        addArticleImage(data);
+      })
+      .catch(error => console.log(error));
+  });
+}
 
 const galContainer =
   document.querySelector('.gallery') || document.querySelector('.library');
