@@ -1,7 +1,7 @@
 import ApiService from './api-service';
 import addArticleImage from './fetchImages';
 import { saveInfo, getInfo, removeInfo } from './storage_api';
-import { createPagination } from './pagination'; // добавил для пагинации
+import { createPagination, createPaginationForSearch } from './pagination'; // добавил для пагинации
 import { fetchFromGallery } from './fetch-render_modal';
 import { backdrop } from './renderModal';
 
@@ -42,8 +42,9 @@ function onFormSubmit(e) {
         setTimeout(() => {
           if (document.querySelector(`.error-notification`)) {
             document.querySelector('.error-notification').innerHTML = '';
-            addArticleImage(data);
+            // addArticleImage(data);
             // console.log('???', data); // проверка
+            createPagination(data.total_results); // добавил для пагинации
 
             saveInfo(data.page, data.results);
           }
@@ -64,7 +65,7 @@ function onFormSubmit(e) {
     cleanView();
     addArticleImage(data);
 
-    createPagination(data.total_results); // добавил для пагинации
+    createPaginationForSearch(data.total_results);
     // console.log(' !!!!!!!!! ', data); // проверка
   });
 }
