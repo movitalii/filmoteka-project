@@ -109,3 +109,5 @@ if (refs.queueBtn) {
 // let watchedData = getInfo('watched');
 // console.log("LENGTH", localData.length);
 // if (watchedData && watchedData.length > 0 ) {onClickWatched()};
+
+export { onClickQueue, onClickWatched };

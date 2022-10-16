@@ -1,5 +1,6 @@
 import { renderModal, backdrop } from './renderModal';
 import { getInfo, saveInfo } from './storage_api';
+import { onClickQueue, onClickWatched } from './render-cards-library';
 
 export function fetchFromGallery(args, key) {
   let searchPage = getInfo(key);
@@ -57,6 +58,8 @@ export function fetchFromGallery(args, key) {
           watched.textContent = 'Remove from Watched';
         }
         saveInfo('watched', watchedMovies);
+        onClickWatched();
+        return;
       });
 
       let watchedMovies = getInfo('watched') || [];
@@ -86,6 +89,7 @@ export function fetchFromGallery(args, key) {
           queued.textContent = 'Remove from Queue';
         }
         saveInfo('queue', queuedMovies);
+        onClickQueue();
       });
 
       let queuedMovies = getInfo('queue') || [];
