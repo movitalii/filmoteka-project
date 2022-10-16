@@ -27,83 +27,77 @@ function onFormSubmit(e) {
   if (searchRequest !== '') {
     apiService.query = e.currentTarget.elements.searchQuery.value;
 
-  apiService.fetchFundFilms().then(data => {
-    const galContainer = document.querySelector('.gallery');
+    apiService.fetchFundFilms().then(data => {
+      const galContainer = document.querySelector('.gallery');
 
-    if (data.results.length === 0) {
-      // input.value = '';
+      if (data.results.length === 0) {
+        // input.value = '';
 
-      document
-        .querySelector('.error-notification')
-        .insertAdjacentHTML(
-          'beforeend',
-          'Search result not successful. Enter the correct movie name.'
-        );
+        document
+          .querySelector('.error-notification')
+          .insertAdjacentHTML(
+            'beforeend',
+            'Search result not successful. Enter the correct movie name.'
+          );
 
         apiService.fetchGenres().then(data => {
           genres = data.genres;
           localStorage.setItem(GENRE_NAME, JSON.stringify(genres));
           apiService.fetchImage().then(data => {
-            
             // console.log('YES', data.total_results);
             createPagination(data.total_results); // добавил для пагинации
-        
+
             addArticleImage(data);
             saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
           });
           //  console.log('ok', data.genres);
         });
 
-      apiService.fetchImage().then(data => {
-        setTimeout(() => {
-          if (document.querySelector(`.error-notification`)) {
-            document.querySelector('.error-notification').innerHTML = '';
-            input.value = '';
-            // addArticleImage(data);
-            saveInfo(data.page, data.results);
-            // let genres = [];
-            apiService.fetchImage().then(data => {
-              
-              createPagination(data.total_results); // добавил для пагинации
-              
-              saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
-              
-            })
-            input.value = '';
-            const GENRE_NAME = 'genre_card';
-            let genres = [];
+        apiService.fetchImage().then(data => {
+          setTimeout(() => {
+            if (document.querySelector(`.error-notification`)) {
+              document.querySelector('.error-notification').innerHTML = '';
+              input.value = '';
+              // addArticleImage(data);
+              saveInfo(data.page, data.results);
+              // let genres = [];
+              apiService.fetchImage().then(data => {
+                createPagination(data.total_results); // добавил для пагинации
 
-            const genreName = localStorage.getItem(GENRE_NAME);
-// console.log('genre', genreName)
-            genres = JSON.parse(genreName);
-            console.log(genres);
-            document.querySelector(`.gallery`).innerHTML = '';
-            addArticleImage(data);
-           
-          }
-        }, 2000);
-      });
+                saveInfo(data.page, data.results); // добавил сохранение в локалсторедж при обращении к АПИ////////
+              });
+              input.value = '';
+              const GENRE_NAME = 'genre_card';
+              let genres = [];
 
-      //  console.log(cartError)
-      return;
-    } else {
-      // console.log(data.results);
-      saveInfo('page', data.results);
+              const genreName = localStorage.getItem(GENRE_NAME);
+              // console.log('genre', genreName)
+              genres = JSON.parse(genreName);
+              console.log(genres);
+              document.querySelector(`.gallery`).innerHTML = '';
+              addArticleImage(data);
+            }
+          }, 2000);
+        });
 
-      // console.log(galContainer);
-      galContainer.addEventListener('click', showCard);
-    }
+        //  console.log(cartError)
+        return;
+      } else {
+        // console.log(data.results);
+        saveInfo('page', data.results);
 
-    // console.log('ok', data.results.length);
-    cleanView();
-    addArticleImage(data);
+        // console.log(galContainer);
+        galContainer.addEventListener('click', showCard);
+      }
 
-    createPaginationForSearch(data.total_results);
-    // console.log(' !!!!!!!!! ', data); // проверка
-  });
+      // console.log('ok', data.results.length);
+      cleanView();
+      addArticleImage(data);
+
+      createPaginationForSearch(data.total_results);
+      // console.log(' !!!!!!!!! ', data); // проверка
+    });
   }
-
-  
 }
 
 function cleanView() {
@@ -112,6 +106,11 @@ function cleanView() {
 
 function showCard(e) {
   e.preventDefault();
+
+  if (e.target.nodeName === 'DIV') {
+    return;
+  }
+
   backdrop.classList.remove('is-hidden');
   fetchFromGallery(
     '/' +

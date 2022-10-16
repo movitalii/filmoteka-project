@@ -26,7 +26,13 @@ function closeModalHandler(e) {
 
 function showCard(e) {
   e.preventDefault();
+
+  if (e.target.nodeName === 'DIV') {
+    return;
+  }
+
   backdrop.classList.remove('is-hidden');
+
   fetchGallery(
     '/' +
       e.target.src.substring(
