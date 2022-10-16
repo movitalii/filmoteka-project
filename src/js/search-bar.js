@@ -22,8 +22,9 @@ if (searchFormRef) {
 
 function onFormSubmit(e) {
   e.preventDefault();
+  const searchRequest = e.currentTarget.searchQuery.value.trim();
 
-  if (input.value !== '') {
+  if (searchRequest !== '') {
     apiService.query = e.currentTarget.elements.searchQuery.value;
 
   apiService.fetchFundFilms().then(data => {
