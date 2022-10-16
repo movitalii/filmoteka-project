@@ -37,24 +37,24 @@ export default function addArticleImage(data) {
     .flat(1)
     .map(result => {
       let genresArr = [];
-      if (result.gender === 0) {
-        title = result.name;
-        console.log(title);
-        result.genre_ids = [35, 18];
-        result.first_air_date = '2017-10-17';
-      }
-      if (result.gender === 1) {
-        title = result.name;
-        console.log(title);
-        result.genre_ids = [27, 18, 9648];
-        result.first_air_date = '2002-10-17';
-      }
-      if (result.gender === 2) {
-        title = result.name;
-        console.log(title);
-        result.genre_ids = [35, 14, 10768];
-        result.first_air_date = '2021-10-17';
-      }
+      // if (result.gender === 0) {
+      //   title = result.name;
+      //   console.log(title);
+      //   result.genre_ids = [35, 18];
+      //   result.first_air_date = '2017-10-17';
+      // }
+      // if (result.gender === 1) {
+      //   title = result.name;
+      //   console.log(title);
+      //   result.genre_ids = [27, 18, 9648];
+      //   result.first_air_date = '2002-10-17';
+      // }
+      // if (result.gender === 2) {
+      //   title = result.name;
+      //   console.log(title);
+      //   result.genre_ids = [35, 14, 10768];
+      //   result.first_air_date = '2021-10-17';
+      // }
 
       result.genre_ids.forEach(genreID => {
         genres.forEach(genOBJ => {
