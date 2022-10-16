@@ -18,7 +18,7 @@ if (searchFormRef) {
   searchFormRef.addEventListener('submit', onFormSubmit);
 }
 
-console.log(searchFormRef);
+// console.log(searchFormRef);
 
 function onFormSubmit(e) {
   e.preventDefault();
@@ -30,8 +30,6 @@ function onFormSubmit(e) {
 
     if (data.results.length === 0) {
       // input.value = '';
-      data = previousSearch;
-      console.log('????', data); // проверка
 
       document
         .querySelector('.error-notification')
@@ -58,9 +56,6 @@ function onFormSubmit(e) {
       // console.log(data.results);
       saveInfo('page', data.results);
 
-      previousSearch = data;
-      console.log('Help - yes, use it', data.total_results); // проверка
-
       // console.log(galContainer);
       galContainer.addEventListener('click', showCard);
     }
@@ -70,7 +65,7 @@ function onFormSubmit(e) {
     addArticleImage(data);
 
     createPagination(data.total_results); // добавил для пагинации
-    console.log(' !!!!!!!!! ', data); // проверка
+    // console.log(' !!!!!!!!! ', data); // проверка
   });
 }
 
