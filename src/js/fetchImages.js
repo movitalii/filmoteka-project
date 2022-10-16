@@ -29,7 +29,7 @@ localStorage.setItem(GENRE_NAME, JSON.stringify(genres));
 const genreName = localStorage.getItem(GENRE_NAME);
 // console.log('genre', genreName)
 genres = JSON.parse(genreName);
-console.log(genres);
+// console.log(genres);
 
 export default function addArticleImage(data) {
   // console.log('image', data);
