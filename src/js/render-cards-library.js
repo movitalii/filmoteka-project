@@ -22,6 +22,11 @@ function makeArrayToRender(arg) {
   cardGallery.addEventListener('click', clickHandler);
   function clickHandler(e) {
     e.preventDefault();
+
+    if (e.target.nodeName === 'DIV') {
+      return;
+    }
+
     backdrop.classList.remove('is-hidden');
     fetchFromGallery(
       '/' +

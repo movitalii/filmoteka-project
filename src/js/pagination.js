@@ -161,6 +161,11 @@ galContainer.addEventListener('click', showCard);
 // console.log('createPagination();', createPagination());
 function showCard(e) {
   e.preventDefault();
+
+  if (e.target.nodeName === 'DIV') {
+    return;
+  }
+
   backdrop.classList.remove('is-hidden');
   // console.log(e.target);
   fetchFromGallery(
