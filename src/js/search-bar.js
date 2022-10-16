@@ -23,7 +23,8 @@ if (searchFormRef) {
 function onFormSubmit(e) {
   e.preventDefault();
 
-  apiService.query = e.currentTarget.elements.searchQuery.value;
+  if (input.value !== '') {
+    apiService.query = e.currentTarget.elements.searchQuery.value;
 
   apiService.fetchFundFilms().then(data => {
     const galContainer = document.querySelector('.gallery');
@@ -68,6 +69,9 @@ function onFormSubmit(e) {
     createPaginationForSearch(data.total_results);
     // console.log(' !!!!!!!!! ', data); // проверка
   });
+  }
+
+  
 }
 
 function cleanView() {
