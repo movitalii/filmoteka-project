@@ -2,7 +2,12 @@
   <div class="container">
     <div class="header-home__container">
       <!-- Logo -->
-      <a class="logo" href="./index.html" aria-label="Website Logo" lang="en">
+      <a
+        class="logo hover-target"
+        href="./index.html"
+        aria-label="Website Logo"
+        lang="en"
+      >
         <svg class="logo__icon" width="24" height="24">
           <use href="./images/sprite.svg#logo-icon"></use>
         </svg>
@@ -12,10 +17,10 @@
       <!--     Navigation -->
       <nav class="nav">
         <ul class="nav__list">
-          <li class="nav__item">
+          <li class="nav__item hover-target">
             <a class="nav__link nav__link--current" href="./index.html">Home</a>
           </li>
-          <li class="nav__item">
+          <li class="nav__item hover-target">
             <a class="nav__link" href="./library.html">My library</a>
           </li>
         </ul>
@@ -25,13 +30,13 @@
     <!--     Search-form-->
     <form id="form-search" action="" class="form-group">
       <input
-        class="form-group__input"
+        class="form-group__input hover-target"
         autocomplete="off"
         name="searchQuery"
         type="text"
         placeholder="Movie search"
       />
-      <button class="form-group__button" type="submit">
+      <button class="form-group__button hover-target" type="submit">
         <svg class="form-group__icon">
           <use href="./images/sprite.svg#search-icon"></use>
         </svg>
@@ -45,7 +50,7 @@
 
     <!-- User-theme-->
     <div class="page-action">
-      <button type="button" class="page-action__theme"></button>
+      <button type="button" class="page-action__theme hover-target"></button>
     </div>
   </div>
 </header>

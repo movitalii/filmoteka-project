@@ -2,7 +2,12 @@
   <div class="container">
     <div class="header-lib__container">
       <!-- Logo -->
-      <a class="logo" href="./index.html" aria-label="Website Logo" lang="en">
+      <a
+        class="logo hover-target"
+        href="./index.html"
+        aria-label="Website Logo"
+        lang="en"
+      >
         <svg class="logo__icon" width="24" height="24">
           <use href="./images/sprite.svg#logo-icon"></use>
         </svg>
@@ -12,10 +17,10 @@
       <!-- Navigation -->
       <nav class="nav">
         <ul class="nav__list">
-          <li class="nav__item">
+          <li class="nav__item hover-target">
             <a class="nav__link" href="./index.html">Home</a>
           </li>
-          <li class="nav__item">
+          <li class="nav__item hover-target">
             <a class="nav__link nav__link--current" href="./library.html"
               >My library</a
             >
@@ -26,17 +31,21 @@
 
     <!-- Button-box-->
     <div class="btn-container">
-      <button class="library-button" id="watched-lib" type="button">
+      <button
+        class="library-button hover-target"
+        id="watched-lib"
+        type="button"
+      >
         <span class="label">watched</span>
       </button>
 
-      <button class="library-button" id="queue-lib" type="button">
+      <button class="library-button hover-target" id="queue-lib" type="button">
         <span class="label">queue</span>
       </button>
     </div>
     <!-- User-theme-->
     <div class="page-action">
-      <button type="button" class="page-action__theme"></button>
+      <button type="button" class="page-action__theme hover-target"></button>
     </div>
   </div>
 </header>
