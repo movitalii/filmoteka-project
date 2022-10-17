@@ -4,6 +4,19 @@ import { onClickQueue, onClickWatched } from './render-cards-library';
 
 export function fetchFromGallery(args, key) {
   let searchPage = getInfo(key);
+  console.log(args);
+  if (args == '/temp-inventory-landing.jpg') {
+    renderModal(fakePage);
+    let closeModal = document.querySelector('[data-modal-close]');
+    closeModal.addEventListener('click', onCloseBtn);
+    function onCloseBtn() {
+      backdrop.classList.add('is-hidden');
+    }
+    let watched = document.querySelector('#watched');
+    let queued = document.querySelector('#queue');
+    watched.classList.add('is-hidden');
+    queued.classList.add('is-hidden');
+  }
   let arrayOfGenres = [];
   let genres = getInfo('genre_card');
   searchPage.forEach(element => {
@@ -16,7 +29,9 @@ export function fetchFromGallery(args, key) {
         });
       });
       element.genre_ids = arrayOfGenres;
+      console.log(element);
       renderModal(element);
+
       let closeModal = document.querySelector('[data-modal-close]');
       closeModal.addEventListener('click', onCloseBtn);
 
@@ -106,3 +121,20 @@ export function fetchFromGallery(args, key) {
     }
   });
 }
+
+const fakePage = {
+  adult: null,
+  backdrop_path: null,
+  genre_ids: ['fake paging'],
+  id: 1000000000000001,
+  original_language: 'en',
+  original_title: 'Under construction :)',
+  overview: 'Unfortunatelly, this page isn`t ready yet...',
+  popularity: 100500,
+  poster_path: '/ty7LXa7RpT6g8v0oe3q7XIruCup.jpg',
+  release_date: '1970-01-01',
+  title: 'Under construction :)',
+  video: null,
+  vote_average: 10,
+  vote_count: 1000000000,
+};
